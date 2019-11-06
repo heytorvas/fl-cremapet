@@ -2,8 +2,7 @@ package br.unitins.model;
 
 public enum Perfil {
 	ADMINISTRADOR(1, "Administrador"), 
-	FUNCIONARIO(2, "Funcionário"), 
-	CLIENTE(3, "Cliente");
+	FUNCIONARIO(2, "Funcionário");
 	
 	private int value;
 	private String label;

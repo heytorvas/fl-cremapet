@@ -15,7 +15,7 @@ public class Pessoa {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.setSexo(sexo);
+		this.sexo = sexo;
 		this.email = email;
 		this.senha = senha;
 		this.endereco = endereco;

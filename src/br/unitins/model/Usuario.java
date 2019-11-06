@@ -1,6 +1,8 @@
 package br.unitins.model;
 
 public class Usuario extends Pessoa implements Cloneable {
+	
+	private Perfil perfil;
 	private Double salario;
 
 	public Usuario() {
@@ -16,6 +18,12 @@ public class Usuario extends Pessoa implements Cloneable {
 	}
 	public void setSalario(Double salario) {
 		this.salario = salario;
+	}
+	public Perfil getPerfil() {
+		return perfil;
+	}
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 }
 
