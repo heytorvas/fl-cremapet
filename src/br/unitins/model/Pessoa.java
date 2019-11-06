@@ -6,19 +6,18 @@ public class Pessoa {
 	private Sexo sexo;
 	private String email;
 	private String senha;
-	private Endereco endereco;
+	//private Endereco endereco;
 	
 	public Pessoa() {
 		
 	}
-	public Pessoa(Integer id, Sexo sexo, String nome, String email, String senha, Endereco endereco) {
+	public Pessoa(Integer id, Sexo sexo, String nome, String email, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.sexo = sexo;
 		this.email = email;
 		this.senha = senha;
-		this.endereco = endereco;
 	}
 	
 	public Integer getId() {
@@ -51,10 +50,10 @@ public class Pessoa {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public Endereco getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
+//	public Endereco getEndereco() {
+//		return endereco;
+//	}
+//	public void setEndereco(Endereco endereco) {
+//		this.endereco = endereco;
+//	}
 }

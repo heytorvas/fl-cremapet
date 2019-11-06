@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title>Hello, World!</title>
+</h:head>
+<h:body>
+	<center>
+		<h1>Cadastro de Usuário</h1>
+
+		<h:form id="formPrincipal">
+			<h:messages id="messages" infoStyle="color:green"
+				warnStyle="color:orange" errorStyle="color:red" globalOnly="false" />
+			<h:panelGrid id="panelPrincipal" columns="2">
+
+				<h:outputLabel value="Nome: " />
+				<h:inputText id="inputNome"
+					value="#{usuarioController.usuario.nome}" />
+
+				<h:outputLabel value="Sexo: " />
+				<h:selectOneMenu value="#{usuarioController.usuario.sexo}">
+					<f:selectItem itemLabel="Selecione ...." />
+					<f:selectItems value="#{usuarioController.listaSexo}" var="sexo"
+						itemLabel="#{sexo.label}" itemValue="#{sexo}" />
+				</h:selectOneMenu>
+
+				<h:outputLabel value="Email: " />
+				<h:panelGrid columns="2">
+					<h:inputText id="inputEmail"
+						value="#{usuarioController.usuario.email}"
+						requiredMessage="O campo login não pode ser nulo.">
+						<f:validateRequired />
+					</h:inputText>
+					<h:message for="inputEmail" style="color:red" />
+				</h:panelGrid>
+
+				<h:outputLabel value="Senha: " />
+				<h:inputSecret value="#{usuarioController.usuario.senha}" />
+
+				<h:outputLabel value="Perfil: " />
+				<h:selectOneMenu value="#{usuarioController.usuario.perfil}">
+					<f:selectItem itemLabel="Selecione ...." />
+					<f:selectItems value="#{usuarioController.listaPerfil}"
+						var="perfil" itemLabel="#{perfil.label}" itemValue="#{perfil}" />
+				</h:selectOneMenu>
+
+				<h:outputLabel value="Salario: " />
+				<h:inputText id="inputSalario"
+					value="#{usuarioController.usuario.salario}" />
+
+			</h:panelGrid>
+
+			<h:panelGrid id="panelBotoes" columns="4">
+				<h:commandButton value="Incluir"
+					disabled="#{usuarioController.usuario.id != null}"
+					actionListener="#{usuarioController.incluir()}">
+					<f:ajax render="formPrincipal" execute="panelPrincipal"
+						resetValues="true" />
+
+				</h:commandButton>
+				<h:commandButton value="Alterar"
+					disabled="#{usuarioController.usuario.id == null}"
+					actionListener="#{usuarioController.alterar()}">
+					<f:ajax render="formPrincipal messages" execute="formPrincipal" />
+				</h:commandButton>
+
+				<h:commandButton value="Excluir"
+					disabled="#{usuarioController.usuario.id == null}"
+					actionListener="#{usuarioController.excluir()}">
+					<f:ajax render="@all" execute="@this" />
+				</h:commandButton>
+
+				<h:commandButton value="Limpar"
+					action="#{usuarioController.limpar()}">
+					<f:ajax render="formPrincipal inputNome" execute="@this"
+						resetValues="true" />
+				</h:commandButton>
+			</h:panelGrid>
+
+			<h:panelGrid id="panelDataTable">
+				<h:dataTable id="dataTable"
+					value="#{usuarioController.listaUsuario}" var="obj"
+					styleClass="table" headerClass="table-header"
+					rowClasses="table-odd-row, table-even-row">
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+						<h:outputLabel value="#{obj.id}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						<h:commandLink value="#{obj.nome}" style="color: black;"
+							actionListener="#{usuarioController.editar(obj)}">
+							<f:ajax
+								render="formPrincipal:panelPrincipal formPrincipal:panelBotoes"
+								execute="formPrincipal:dataTable" />
+						</h:commandLink>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Sexo</f:facet>
+						<h:outputLabel value="#{obj.sexo.label}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Email</f:facet>
+						<h:outputLabel value="#{obj.email}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Senha</f:facet>
+						<h:outputLabel value="#{obj.senha}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Perfil</f:facet>
+						<h:outputLabel value="#{obj.perfil.label}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Salario</f:facet>
+						<h:outputLabel value="#{obj.salario}" />
+					</h:column>
+					<h:column>
+						<h:commandLink value="Apagar"
+							actionListener="#{usuarioController.excluir(obj)}">
+							<f:ajax render="formPrincipal" execute="formPrincipal:dataTable" />
+						</h:commandLink>
+					</h:column>
+				</h:dataTable>
+			</h:panelGrid>
+		</h:form>
+	</center>
+
+</h:body>
+</html>

@@ -21,11 +21,11 @@ public enum Sexo {
 		return label;
 	}
 	
-	public static Perfil valueOf(int value) {
+	public static Sexo valueOf(int value) {
 		
-		for (Perfil perfil : Perfil.values()) {
-			if (perfil.getValue() == value) 
-				return perfil;
+		for (Sexo sexo : Sexo.values()) {
+			if (sexo.getValue() == value) 
+				return sexo;
 		}
 		return null;
 	}

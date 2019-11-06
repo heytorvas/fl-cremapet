@@ -8,6 +8,35 @@ public class Usuario extends Pessoa implements Cloneable {
 	public Usuario() {
 		
 	}
+	
+	@Override
+	public Usuario clone() {
+		try {
+			return (Usuario) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			System.out.println("Erro ao clonar.");
+		}
+		return null;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (this.getId() == null) {
+			if (other.getId() != null)
+				return false;
+		} else if (!this.getId().equals(other.getId()))
+			return false;
+		return true;
+	}
+	
 	public Usuario(Double salario) {
 		super();
 		this.salario = salario;
@@ -26,5 +55,3 @@ public class Usuario extends Pessoa implements Cloneable {
 		this.perfil = perfil;
 	}
 }
-
-
