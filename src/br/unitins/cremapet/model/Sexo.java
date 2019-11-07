@@ -1,8 +1,7 @@
-package br.unitins.model;
+package br.unitins.cremapet.model;
 
 public enum Sexo {
-	
-	MASCULINO(1, "Masculino"),
+	MASCULINO(1, "Masculino"), 
 	FEMININO(2, "Feminino");
 	
 	private int value;

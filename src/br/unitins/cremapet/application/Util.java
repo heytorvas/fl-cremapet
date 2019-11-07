@@ -1,11 +1,18 @@
-package br.unitins.application;
+package br.unitins.cremapet.application;
+
+import java.io.IOException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.apache.commons.codec.cli.Digest;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class Util {
+	
+	public static void main(String[] args) {
+		System.out.println(DigestUtils.sha256Hex("asldkjfa;lskdjf;laksjdflaksjdflkjas;dlkfja;lskdjf;alksjdf;lkasjdf;lkasjd;flkjasd;lkfjas;dlkjfa;sldkjf;laksdjf;lkasjd;flkjasd;lkjf;lasdkjf;laksjdf;lkjasd;lkfjas;dlkj"));
+	}
 	
 	public static String hashSHA256(String valor) {
 		return DigestUtils.sha256Hex(valor);

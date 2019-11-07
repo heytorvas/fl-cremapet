@@ -1,8 +1,9 @@
-package br.unitins.model;
+package br.unitins.cremapet.model;
 
 public enum Perfil {
 	ADMINISTRADOR(1, "Administrador"), 
-	FUNCIONARIO(2, "Funcionário");
+	FUNCIONARIO(2, "Funcionário"),
+	CLIENTE(3, "Cliente");
 	
 	private int value;
 	private String label;

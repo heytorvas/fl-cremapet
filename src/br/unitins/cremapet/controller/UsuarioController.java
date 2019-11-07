@@ -1,27 +1,29 @@
-package br.unitins.controller;
+package br.unitins.cremapet.controller;
 
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import br.unitins.application.Util;
-import br.unitins.dao.DAO;
-import br.unitins.dao.UsuarioDAO;
-import br.unitins.model.Perfil;
-import br.unitins.model.Sexo;
-import br.unitins.model.Usuario;
+import br.unitins.cremapet.application.Util;
+import br.unitins.cremapet.dao.DAO;
+import br.unitins.cremapet.dao.UsuarioDAO;
+import br.unitins.cremapet.model.Perfil;
+import br.unitins.cremapet.model.Sexo;
+import br.unitins.cremapet.model.Usuario;
 
 @Named
 @ViewScoped
-public class UsuarioController implements Serializable{
 
-	private static final long serialVersionUID = -1252416557438065646L;
+public class UsuarioController implements Serializable {
 	
+	private static final long serialVersionUID = -6998638931332554108L;
+
 	private Usuario usuario;
+	
 	private List<Usuario> listaUsuario;
 	
 	public List<Usuario> getListaUsuario() {
@@ -33,7 +35,7 @@ public class UsuarioController implements Serializable{
 		} 
 		return listaUsuario;
 	}
-	
+
 	public void incluir() {
 		if (validarDados()) {
 			DAO<Usuario> dao = new UsuarioDAO();
@@ -91,7 +93,7 @@ public class UsuarioController implements Serializable{
 		try {
 			dao.delete(getUsuario().getId());
 			dao.getConnection().commit();
-			Util.addMessageInfo("Exclusão realizada com sucesso.");
+			Util.addMessageInfo("ExclusÃ£o realizada com sucesso.");
 			return true;
 		} catch (SQLException e) {
 			dao.rollbackConnection();
@@ -102,7 +104,7 @@ public class UsuarioController implements Serializable{
 			dao.closeConnection();
 		}
 	}
-	
+
 	private boolean validarDados() {
 //		if (getUsuario().getSenha().isBlank()) {
 //			Util.addMessageWarn("O campo senha deve ser informado.");
@@ -116,14 +118,31 @@ public class UsuarioController implements Serializable{
 		return true;
 	}
 	
+	private int ultimoId() {
+		int maior = 0;
+		for (Usuario usuario : listaUsuario) {
+			if (usuario.getId() > maior)
+				maior = usuario.getId();
+		}
+		return maior;
+	}
+	
+	public void editar(Usuario usuario) {
+		UsuarioDAO dao = new UsuarioDAO();
+		// buscando um usuario pelo id
+		Usuario usu = dao.findId(usuario.getId());
+		setUsuario(usu);
+//		setUsuario(dao.findId(usuario.getId()));
+	}
+
 	public Usuario getUsuario() {
 		if (usuario == null) {
 			usuario = new Usuario();
-			//usuario.setTelefone(new Telefone());
+//			usuario.setNascimento(new Nascimento());
 		}
 		return usuario;
 	}
-	
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
@@ -139,4 +158,6 @@ public class UsuarioController implements Serializable{
 	public Sexo[] getListaSexo() {
 		return Sexo.values();
 	}
+	
+	
 }

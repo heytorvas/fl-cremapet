@@ -1,11 +1,14 @@
-package br.unitins.dao;
+package br.unitins.cremapet.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-public abstract class DAO <T>{
+
+public abstract class DAO<T>{
+	
+	// CRUD
 	public abstract void create(T entity) throws SQLException;
 	public abstract void update(T entity) throws SQLException;
 	public abstract void delete(int id) throws SQLException;
@@ -40,7 +43,6 @@ public abstract class DAO <T>{
 		
 		return conn;
 	}
-	
 	private boolean isClosedConnection() {
 		try {
 			if (conn == null || conn.isClosed()) 
@@ -66,4 +68,5 @@ public abstract class DAO <T>{
 			e.printStackTrace();
 		}
 	}
+
 }
