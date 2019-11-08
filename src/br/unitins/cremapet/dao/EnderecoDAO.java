@@ -34,7 +34,7 @@ public class EnderecoDAO extends DAO<Endereco> {
 	}
 
 	@Override
-	public void update(Endereco entity) throws SQLException {
+	public void update(Endereco endereco) throws SQLException {
 		// TODO Auto-generated method stub
 
 	}

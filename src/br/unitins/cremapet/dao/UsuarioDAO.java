@@ -37,6 +37,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 					"  senha, " +
 					"  perfil " +
 					"  sexo " +
+					"  salario " +
 					"FROM " +
 					"  public.usuario " +
 					"WHERE login = ? AND senha = ? ");
@@ -57,6 +58,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setPerfil(Perfil.valueOf(rs.getInt("perfil")));
 				usuario.setSexo(Sexo.valueOf(rs.getInt("sexo")));
+				usuario.setSalario(rs.getDouble("salario"));
 			}
 			
 			return usuario;
@@ -76,15 +78,16 @@ public class UsuarioDAO extends DAO<Usuario> {
 		PreparedStatement stat = conn.prepareStatement(
 				"INSERT INTO " +
 			    "public.usuario " +
-			    " (nome, cpf, login, senha, perfil, sexo) " +
+			    " (nome, cpf, login, senha, perfil, sexo, salario) " +
 				"VALUES " +
-			    " (?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
+			    " (?, ?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
 		stat.setString(1, usuario.getNome());
 		stat.setString(2, usuario.getCpf());
 		stat.setString(3, usuario.getLogin());
 		stat.setString(4, usuario.getSenha());
 		stat.setInt(5, usuario.getPerfil().getValue());
 		stat.setInt(6, usuario.getSexo().getValue());
+		stat.setDouble(7, usuario.getSalario());
 		
 		stat.execute();
 		
@@ -110,6 +113,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 			    " senha = ?, " +
 			    " perfil = ? " +
 			    " sexo = ? " +
+			    " salario = ? " +
 				"WHERE " +
 			    " id = ? ");
 		stat.setString(1, usuario.getNome());
@@ -118,7 +122,8 @@ public class UsuarioDAO extends DAO<Usuario> {
 		stat.setString(4, usuario.getSenha());
 		stat.setInt(5, usuario.getPerfil().getValue());
 		stat.setInt(6, usuario.getSexo().getValue());
-		stat.setInt(7, usuario.getId());
+		stat.setDouble(7, usuario.getSalario());
+		stat.setInt(8, usuario.getId());
 			
 		stat.execute();
 			
@@ -162,6 +167,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 					"  senha, " +
 					"  perfil " +
 					"  sexo " +
+					"  salario " +
 					"FROM " +
 					"  public.usuario ");
 			ResultSet rs = stat.executeQuery();
@@ -177,6 +183,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setPerfil(Perfil.valueOf(rs.getInt("perfil")));
 				usuario.setSexo(Sexo.valueOf(rs.getInt("sexo")));
+				usuario.setSalario(rs.getDouble("salario"));
 				
 				listaUsuario.add(usuario);
 			}
@@ -206,6 +213,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 					"  senha, " +
 					"  perfil " +
 					"  sexo " +
+					"  salario " +
 					"FROM " +
 					"  public.usuario " +
 					"WHERE id = ? ");
@@ -225,6 +233,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setPerfil(Perfil.valueOf(rs.getInt("perfil")));
 				usuario.setSexo(Sexo.valueOf(rs.getInt("sexo")));
+				usuario.setSalario(rs.getDouble("salario"));
 				
 				EnderecoDAO dao = new EnderecoDAO(conn);
 				usuario.setEndereco(dao.findById(usuario.getId()));

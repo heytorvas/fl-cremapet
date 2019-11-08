@@ -5,7 +5,7 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
-	<title>CRUD - Usuario</title>
+	<title>CRUD - Cliente</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
 	<meta name="viewport"
@@ -33,14 +33,14 @@
 								<h:panelGrid columns="1" class="mr-2 ">
 									<h:outputLabel value="Nome: " />
 									<h:inputText id="inputNome"
-										value="#{usuarioController.usuario.nome}"
+										value="#{clienteController.cliente.nome}"
 										styleClass="form-control form-control-lg pr-5 mr-5" />
 								</h:panelGrid>
 
 								<h:panelGrid columns="1" class="mr-2 ">
 									<h:outputLabel value="CPF: " />
 									<h:inputText id="inputCPF"
-										value="#{usuarioController.usuario.cpf}"
+										value="#{clienteController.cliente.cpf}"
 										styleClass="form-control form-control-lg pr-5 mr-5" />
 								</h:panelGrid>
 
@@ -49,7 +49,7 @@
 									<h:outputLabel value="Login: " />
 									<h:panelGrid columns="2">
 										<h:inputText id="inputLogin"
-											value="#{usuarioController.usuario.login}"
+											value="#{clienteController.cliente.login}"
 											requiredMessage="O campo login não pode ser nulo."
 											styleClass="form-control form-control-lg pr-5 mr-5">
 											<f:validateRequired />
@@ -62,77 +62,58 @@
 
 								<h:panelGrid columns="1" class="mr-2 ">
 									<h:outputLabel value="Senha: " />
-									<h:inputSecret value="#{usuarioController.usuario.senha}"
+									<h:inputSecret value="#{clienteController.cliente.senha}"
 										styleClass="form-control form-control-lg pr-5 mr-5"
 										maxlength="60" size="60" />
 								</h:panelGrid>
 							</h:panelGrid>
 							<h:panelGrid columns="1">
 								<h:panelGrid class="mr-2" columns="1">
-									<h:outputLabel value="Perfil: " />
-									<h:selectOneMenu value="#{usuarioController.usuario.perfil}"
-										styleClass="form-control form-control-lg pr-5 mr-5 "
-										style="width: 480px;">
-										<f:selectItem itemLabel="Selecione ...." />
-										<f:selectItems value="#{usuarioController.listaPerfil}"
-											var="perfil" itemLabel="#{perfil.label}"
-											itemValue="#{perfil}" />
-									</h:selectOneMenu>
-								</h:panelGrid>
-							</h:panelGrid>
-							<h:panelGrid columns="1">
-								<h:panelGrid class="mr-2" columns="1">
 									<h:outputLabel value="Sexo: " />
-									<h:selectOneMenu value="#{usuarioController.usuario.sexo}"
+									<h:selectOneMenu value="#{clienteController.cliente.sexo}"
 										styleClass="form-control form-control-lg pr-5 mr-5 "
 										style="width: 480px;">
 										<f:selectItem itemLabel="Selecione ...." />
-										<f:selectItems value="#{usuarioController.listaSexo}"
+										<f:selectItems value="#{clienteController.listaSexo}"
 											var="sexo" itemLabel="#{sexo.label}" itemValue="#{sexo}" />
 									</h:selectOneMenu>
 								</h:panelGrid>
 							</h:panelGrid>
-							<h:panelGrid columns="1" class="mr-2 ">
-									<h:outputLabel value="Salario: " />
-									<h:inputText id="inputSalario"
-										value="#{usuarioController.usuario.salario}"
-										styleClass="form-control form-control-lg pr-5 mr-5" />
-								</h:panelGrid>
 							
 							<h4 class="text-center wdi-red font-weight-bold">Endereço</h4>
 
 							<h:panelGrid columns="1" class="mr-2 ">
 								<h:outputLabel value="Rua: " />
 								<h:inputText id="inputRua"
-									value="#{usuarioController.usuario.endereco.rua}"
+									value="#{clienteController.cliente.endereco.rua}"
 									styleClass="form-control form-control-lg pr-5 mr-5" />
 							</h:panelGrid>
 							<h:panelGrid columns="1" class="mr-2 ">
 								<h:outputLabel value="Numero: " />
 								<h:inputText id="inputNumero"
-									value="#{usuarioController.usuario.endereco.numero}"
+									value="#{clienteController.cliente.endereco.numero}"
 									styleClass="form-control form-control-lg pr-5 mr-5" />
 							</h:panelGrid>
 							<h:panelGrid columns="1" class="mr-2 ">
 								<h:outputLabel value="Bairro: " />
 								<h:inputText id="inputBairro"
-									value="#{usuarioController.usuario.endereco.bairro}"
+									value="#{clienteController.cliente.endereco.bairro}"
 									styleClass="form-control form-control-lg pr-5 mr-5" />
 							</h:panelGrid>
 							<h:panelGrid columns="1" class="mr-2 ">
 								<h:outputLabel value="Cidade: " />
 								<h:inputText id="inputCidade"
-									value="#{usuarioController.usuario.endereco.cidade}"
+									value="#{clienteController.cliente.endereco.cidade}"
 									styleClass="form-control form-control-lg pr-5 mr-5" />
 							</h:panelGrid>
 							<h:panelGrid columns="1">
 								<h:panelGrid class="mr-2" columns="1">
 									<h:outputLabel value="Estado: " />
-									<h:selectOneMenu value="#{usuarioController.usuario.endereco.estados}"
+									<h:selectOneMenu value="#{clienteController.cliente.endereco.estados}"
 										styleClass="form-control form-control-lg pr-5 mr-5 "
 										style="width: 480px;">
 										<f:selectItem itemLabel="Selecione ...." />
-										<f:selectItems value="#{usuarioController.listaEstado}"
+										<f:selectItems value="#{clienteController.listaEstado}"
 											var="estado" itemLabel="#{estado.sigla}" itemValue="#{estado}" />
 									</h:selectOneMenu>
 								</h:panelGrid>
@@ -141,8 +122,8 @@
 						<h:panelGrid class="text-center" id="panelBotoes" columns="1"
 							style="width: 530px;">
 							<h:commandButton value="Incluir"
-								disabled="#{usuarioController.usuario.id != null}"
-								actionListener="#{usuarioController.incluir()}"
+								disabled="#{clienteController.cliente.id != null}"
+								actionListener="#{clienteController.incluir()}"
 								styleClass="btn btn-lg btn-block btn-login mt-4">
 								<f:ajax render="formPrincipal" execute="panelPrincipal"
 									resetValues="true" />
