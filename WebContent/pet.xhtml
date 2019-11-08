@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title>CRUD - Pet</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+</h:head>
+<h:body>
+	<!-- Container -->
+	<div class="container d-flex justify-content-center mt-5">
+		<div class="row justify-content-md-center">
+			<div class="col-md-6 col-md-auto login-box">
+				<h:messages styleClass="alert alert-danger hmessages" />
+
+				<h4 class="text-center wdi-red font-weight-bold">Cadastro</h4>
+				<hr />
+				<h:form id="formPrincipal">
+					<div class="form-row">
+						<h:messages id="messages" infoStyle="color:green"
+							warnStyle="color:orange" errorStyle="color:red"
+							globalOnly="false" />
+						<h:panelGrid id="panelPrincipal" columns="1"
+							style="width: 1150px;">
+							<h:panelGrid columns="2">
+								<h:panelGrid columns="1">
+									<h:panelGrid class="mr-2" columns="1">
+										<h:outputLabel value="Sexo: " />
+										<h:selectOneMenu value="#{petController.pet.sexo}"
+											styleClass="form-control form-control-lg pr-5 mr-5 "
+											style="width: 480px;">
+											<f:selectItem itemLabel="Selecione ...." />
+											<f:selectItems value="#{petController.listaSexo}" var="sexo"
+												itemLabel="#{sexo.label}" itemValue="#{sexo}" />
+										</h:selectOneMenu>
+									</h:panelGrid>
+								</h:panelGrid>
+
+								<h:panelGrid columns="1" class="mr-2 ">
+									<h:outputLabel value="Nome: " />
+									<h:inputText id="inputNome" value="#{petController.pet.nome}"
+										styleClass="form-control form-control-lg pr-5 mr-5" />
+								</h:panelGrid>
+
+								<h:panelGrid columns="1" class="mr-2 ">
+									<h:outputLabel value="Animal: " />
+									<h:inputText id="inputAnimal"
+										value="#{petController.pet.animal}"
+										styleClass="form-control form-control-lg pr-5 mr-5" />
+								</h:panelGrid>
+								<h:panelGrid columns="1" class="mr-2 ">
+									<h:outputLabel value="Raca: " />
+									<h:inputText id="inputRaca" value="#{petController.pet.raca}"
+										styleClass="form-control form-control-lg pr-5 mr-5" />
+								</h:panelGrid>
+							</h:panelGrid>
+						</h:panelGrid>
+						<h:panelGrid class="text-center" id="panelBotoes" columns="1"
+							style="width: 530px;">
+							<h:commandButton value="Incluir"
+								disabled="#{petController.pet.id != null}"
+								actionListener="#{petController.incluir()}"
+								styleClass="btn btn-lg btn-block btn-login mt-4">
+								<f:ajax render="formPrincipal" execute="panelPrincipal"
+									resetValues="true" />
+							</h:commandButton>
+						</h:panelGrid>
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</div>
+</h:body>
+
+</html>

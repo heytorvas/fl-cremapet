@@ -35,8 +35,8 @@ public class UsuarioDAO extends DAO<Usuario> {
 					"  cpf, " +
 					"  login, " +
 					"  senha, " +
-					"  perfil " +
-					"  sexo " +
+					"  perfil, " +
+					"  sexo, " +
 					"  salario " +
 					"FROM " +
 					"  public.usuario " +
@@ -111,8 +111,8 @@ public class UsuarioDAO extends DAO<Usuario> {
 			    " cpf = ?, " +
 			    " login = ?, " +
 			    " senha = ?, " +
-			    " perfil = ? " +
-			    " sexo = ? " +
+			    " perfil = ?, " +
+			    " sexo = ?, " +
 			    " salario = ? " +
 				"WHERE " +
 			    " id = ? ");
@@ -165,8 +165,8 @@ public class UsuarioDAO extends DAO<Usuario> {
 					"  cpf, " +
 					"  login, " +
 					"  senha, " +
-					"  perfil " +
-					"  sexo " +
+					"  perfil, " +
+					"  sexo, " +
 					"  salario " +
 					"FROM " +
 					"  public.usuario ");
@@ -211,8 +211,8 @@ public class UsuarioDAO extends DAO<Usuario> {
 					"  cpf, " +
 					"  login, " +
 					"  senha, " +
-					"  perfil " +
-					"  sexo " +
+					"  perfil, " +
+					"  sexo, " +
 					"  salario " +
 					"FROM " +
 					"  public.usuario " +
