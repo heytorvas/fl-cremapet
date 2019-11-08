@@ -5,15 +5,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
 import br.unitins.cremapet.application.Util;
 import br.unitins.cremapet.dao.DAO;
 import br.unitins.cremapet.dao.ClienteDAO;
 import br.unitins.cremapet.model.Endereco;
 import br.unitins.cremapet.model.Estado;
-import br.unitins.cremapet.model.Perfil;
 import br.unitins.cremapet.model.Sexo;
 import br.unitins.cremapet.model.Cliente;
 
+@Named
+@ViewScoped
 public class ClienteController implements Serializable{
 
 	private static final long serialVersionUID = 7475079061536479147L;

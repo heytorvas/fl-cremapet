@@ -19,7 +19,6 @@ import br.unitins.cremapet.model.Usuario;
 
 @Named
 @ViewScoped
-
 public class UsuarioController implements Serializable {
 	
 	private static final long serialVersionUID = -6998638931332554108L;
