@@ -24,7 +24,7 @@ public class PetController implements Serializable {
 
 	private List<Pet> listaPet;
 
-	public List<Pet> getListaUsuario() {
+	public List<Pet> getListaPet() {
 		if (listaPet == null) {
 			DAO<Pet> dao = new PetDAO();
 			listaPet = dao.findAll();
