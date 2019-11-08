@@ -119,7 +119,7 @@
 								</h:panelGrid>
 							</h:panelGrid>
 						</h:panelGrid>
-						<h:panelGrid class="text-center" id="panelBotoes" columns="1"
+						<h:panelGrid class="text-center" id="panelBotoes" columns="4"
 							style="width: 530px;">
 							<h:commandButton value="Incluir"
 								disabled="#{clienteController.cliente.id != null}"
@@ -128,6 +128,63 @@
 								<f:ajax render="formPrincipal" execute="panelPrincipal"
 									resetValues="true" />
 							</h:commandButton>
+							
+							<h:commandButton value="Alterar"
+								disabled="#{clienteController.cliente.id == null}"
+								actionListener="#{clienteController.alterar()}">
+								<f:ajax render="formPrincipal messages" execute="formPrincipal" />
+							</h:commandButton>
+
+							<h:commandButton value="Excluir"
+								disabled="#{clienteController.cliente.id == null}"
+								actionListener="#{clienteController.excluir()}">
+								<f:ajax render="@all" execute="@this" />
+							</h:commandButton>
+
+							<h:commandButton value="Limpar"
+								action="#{clienteController.limpar()}">
+								<f:ajax
+									render="formPrincipal inputNome inputCPF inputLogin inputRua inputNumero inputBairro inputCidade"
+									execute="@this" resetValues="true" />
+							</h:commandButton>
+						</h:panelGrid>
+					</div>
+					<div class="datatable-row">
+						<h:panelGrid id="panelDataTable">
+							<h:dataTable id="dataTable"
+								value="#{clienteController.listaCliente}" var="obj"
+								styleClass="table" headerClass="table-header"
+								rowClasses="table-odd-row, table-even-row">
+								<h:column>
+									<f:facet name="header">Id</f:facet>
+									<h:outputLabel value="#{obj.id}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Nome</f:facet>
+									<h:commandLink value="#{obj.nome}" style="color: black;"
+										actionListener="#{clienteController.editar(obj)}">
+										<f:ajax
+											render="formPrincipal:panelPrincipal formPrincipal:panelBotoes"
+											execute="formPrincipal:dataTable" />
+									</h:commandLink>
+								</h:column>
+								<h:column>
+									<f:facet name="header">CPF</f:facet>
+									<h:outputLabel value="#{obj.cpf}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Login</f:facet>
+									<h:outputLabel value="#{obj.login}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Senha</f:facet>
+									<h:outputLabel value="#{obj.senha}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Sexo</f:facet>
+									<h:outputLabel value="#{obj.sexo.label}" />
+								</h:column>
+							</h:dataTable>
 						</h:panelGrid>
 					</div>
 				</h:form>
