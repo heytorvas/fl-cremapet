@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unitins.cremapet.model.Endereco;
 import br.unitins.cremapet.model.Perfil;
 import br.unitins.cremapet.model.Sexo;
 import br.unitins.cremapet.model.Usuario;
@@ -31,6 +32,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 					"SELECT " +
 					"  id, " +
 					"  nome, " +
+					"  cpf, " +
 					"  login, " +
 					"  senha, " +
 					"  perfil " +
@@ -50,6 +52,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 				usuario = new Usuario();
 				usuario.setId(rs.getInt("id"));
 				usuario.setNome(rs.getString("nome"));
+				usuario.setCpf(rs.getString("cpf"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setPerfil(Perfil.valueOf(rs.getInt("perfil")));
@@ -73,24 +76,25 @@ public class UsuarioDAO extends DAO<Usuario> {
 		PreparedStatement stat = conn.prepareStatement(
 				"INSERT INTO " +
 			    "public.usuario " +
-			    " (nome, login, senha, perfil, sexo) " +
+			    " (nome, cpf, login, senha, perfil, sexo) " +
 				"VALUES " +
-			    " (?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
+			    " (?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
 		stat.setString(1, usuario.getNome());
-		stat.setString(2, usuario.getLogin());
-		stat.setString(3, usuario.getSenha());
-		stat.setInt(4, usuario.getPerfil().getValue());
-		stat.setInt(5, usuario.getSexo().getValue());
+		stat.setString(2, usuario.getCpf());
+		stat.setString(3, usuario.getLogin());
+		stat.setString(4, usuario.getSenha());
+		stat.setInt(5, usuario.getPerfil().getValue());
+		stat.setInt(6, usuario.getSexo().getValue());
 		
 		stat.execute();
 		
-//		// obtendo o id gerado pela tabela do banco de dados
-//		ResultSet rs = stat.getGeneratedKeys();
-//		rs.next();
-//		usuario.getNascimento().setId(rs.getInt("id"));
-//		
-//		NascimentoDAO dao = new NascimentoDAO(conn);
-//		dao.create(usuario.getNascimento());
+		// obtendo o id gerado pela tabela do banco de dados
+		ResultSet rs = stat.getGeneratedKeys();
+		rs.next();
+		usuario.getEndereco().setId(rs.getInt("id"));
+		
+		EnderecoDAO dao = new EnderecoDAO(conn);
+		dao.create(usuario.getEndereco());
 			
 	}
 
@@ -101,6 +105,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 		PreparedStatement stat = conn.prepareStatement(
 				"UPDATE public.usuario SET " +
 			    " nome = ?, " +
+			    " cpf = ?, " +
 			    " login = ?, " +
 			    " senha = ?, " +
 			    " perfil = ? " +
@@ -108,11 +113,12 @@ public class UsuarioDAO extends DAO<Usuario> {
 				"WHERE " +
 			    " id = ? ");
 		stat.setString(1, usuario.getNome());
-		stat.setString(2, usuario.getLogin());
-		stat.setString(3, usuario.getSenha());
-		stat.setInt(4, usuario.getPerfil().getValue());
-		stat.setInt(5, usuario.getSexo().getValue());
-		stat.setInt(6, usuario.getId());
+		stat.setString(2, usuario.getCpf());
+		stat.setString(3, usuario.getLogin());
+		stat.setString(4, usuario.getSenha());
+		stat.setInt(5, usuario.getPerfil().getValue());
+		stat.setInt(6, usuario.getSexo().getValue());
+		stat.setInt(7, usuario.getId());
 			
 		stat.execute();
 			
@@ -122,11 +128,14 @@ public class UsuarioDAO extends DAO<Usuario> {
 	public void delete(int id) throws SQLException {
 
 		Connection  conn = getConnection();
+		
 		// deletando o telefone (pq possui um relacionamento de fk)
 		// passando o conn para manter a mesma transacao
-//		NascimentoDAO dao = new NascimentoDAO(conn);
-//		// telefone tem um relecionamento 1 pra 1, ou seja, o id do usuario eh o mesmo do telefone.
-//		dao.delete(id);
+		EnderecoDAO dao = new EnderecoDAO(conn);
+		
+	
+		// telefone tem um relecionamento 1 pra 1, ou seja, o id do usuario eh o mesmo do telefone.
+		dao.delete(id);
 		
 		// deletando o usuario
 		PreparedStatement stat = conn.prepareStatement(
@@ -148,6 +157,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 					"SELECT " +
 					"  id, " +
 					"  nome, " +
+					"  cpf, " +
 					"  login, " +
 					"  senha, " +
 					"  perfil " +
@@ -162,6 +172,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 				Usuario usuario = new Usuario();
 				usuario.setId(rs.getInt("id"));
 				usuario.setNome(rs.getString("nome"));
+				usuario.setCpf(rs.getString("cpf"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setPerfil(Perfil.valueOf(rs.getInt("perfil")));
@@ -190,6 +201,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 					"SELECT " +
 					"  id, " +
 					"  nome, " +
+					"  cpf, " +
 					"  login, " +
 					"  senha, " +
 					"  perfil " +
@@ -208,16 +220,17 @@ public class UsuarioDAO extends DAO<Usuario> {
 				usuario = new Usuario();
 				usuario.setId(rs.getInt("id"));
 				usuario.setNome(rs.getString("nome"));
+				usuario.setCpf(rs.getString("cpf"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setPerfil(Perfil.valueOf(rs.getInt("perfil")));
 				usuario.setSexo(Sexo.valueOf(rs.getInt("sexo")));
 				
-//				NascimentoDAO dao = new NascimentoDAO(conn);
-//				usuario.setNascimento(dao.findById(usuario.getId()));
+				EnderecoDAO dao = new EnderecoDAO(conn);
+				usuario.setEndereco(dao.findById(usuario.getId()));
 //				// caso o retorno do telefone seja nulo, instanciar um telefone
-//				if (usuario.getNascimento() == null)
-//					usuario.setNascimento(new Nascimento());
+				if (usuario.getEndereco() == null)
+					usuario.setEndereco(new Endereco());
 				
 			}
 			

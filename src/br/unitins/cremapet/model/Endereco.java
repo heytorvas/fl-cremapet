@@ -7,13 +7,13 @@ public class Endereco {
 	private String numero;
 	private String bairro;
 	private String cidade;
-	private Estados estados;
+	private Estado estados;
 	
 	public Endereco() {
 		
 	}
 	
-	public Endereco(Integer id, String rua, String numero, String bairro, String cidade, Estados estados) {
+	public Endereco(Integer id, String rua, String numero, String bairro, String cidade, Estado estados) {
 		super();
 		this.id = id;
 		this.rua = rua;
@@ -53,10 +53,10 @@ public class Endereco {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-	public Estados getEstados() {
+	public Estado getEstados() {
 		return estados;
 	}
-	public void setEstados(Estados estados) {
+	public void setEstados(Estado estados) {
 		this.estados = estados;
 	}
 

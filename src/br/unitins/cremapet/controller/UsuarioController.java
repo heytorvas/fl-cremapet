@@ -11,6 +11,8 @@ import javax.inject.Named;
 import br.unitins.cremapet.application.Util;
 import br.unitins.cremapet.dao.DAO;
 import br.unitins.cremapet.dao.UsuarioDAO;
+import br.unitins.cremapet.model.Endereco;
+import br.unitins.cremapet.model.Estado;
 import br.unitins.cremapet.model.Perfil;
 import br.unitins.cremapet.model.Sexo;
 import br.unitins.cremapet.model.Usuario;
@@ -48,13 +50,13 @@ public class UsuarioController implements Serializable {
 				
 				dao.create(getUsuario());
 				dao.getConnection().commit();
-				Util.addMessageInfo("Inclusão realizada com sucesso.");
+				Util.addMessageInfo("Inclusï¿½o realizada com sucesso.");
 				limpar();
 				listaUsuario = null;
 			} catch (SQLException e) {
 				dao.rollbackConnection();
 				dao.closeConnection();
-				Util.addMessageInfo("Erro ao incluir o Usuário no Banco de Dados.");
+				Util.addMessageInfo("Erro ao incluir o Usuï¿½rio no Banco de Dados.");
 				e.printStackTrace();
 			}
 		}
@@ -69,13 +71,13 @@ public class UsuarioController implements Serializable {
 				getUsuario().setSenha(Util.hashSHA256(getUsuario().getSenha()));
 				dao.update(getUsuario());
 				dao.getConnection().commit();
-				Util.addMessageInfo("Alteração realizada com sucesso.");
+				Util.addMessageInfo("Alteraï¿½ï¿½o realizada com sucesso.");
 				limpar();
 				listaUsuario = null;
 			} catch (SQLException e) {
 				dao.rollbackConnection();
 				dao.closeConnection();
-				Util.addMessageInfo("Erro ao alterar o Usuário no Banco de Dados.");
+				Util.addMessageInfo("Erro ao alterar o Usuï¿½rio no Banco de Dados.");
 				e.printStackTrace();
 			}
 				
@@ -138,6 +140,7 @@ public class UsuarioController implements Serializable {
 	public Usuario getUsuario() {
 		if (usuario == null) {
 			usuario = new Usuario();
+			usuario.setEndereco(new Endereco());
 //			usuario.setNascimento(new Nascimento());
 		}
 		return usuario;
@@ -157,6 +160,10 @@ public class UsuarioController implements Serializable {
 	
 	public Sexo[] getListaSexo() {
 		return Sexo.values();
+	}
+	
+	public Estado[] getListaEstado() {
+		return Estado.values();
 	}
 	
 	

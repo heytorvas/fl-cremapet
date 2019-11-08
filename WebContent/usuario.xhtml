@@ -5,18 +5,12 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
-	<title>World of Warcraft</title>
+	<title>CRUD - Usuario</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-	<!-- Bootstrap CSS -->
-	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<!-- Costumize CSS -->
-	<h:outputStylesheet library="css" name="login.css" />
-	<link rel="shortcut icon" type="image/x-icon"
-		href="#{resource['images/icon.png']}" />
 </h:head>
 <h:body>
 	<!-- Container -->
@@ -40,6 +34,13 @@
 									<h:outputLabel value="Nome: " />
 									<h:inputText id="inputNome"
 										value="#{usuarioController.usuario.nome}"
+										styleClass="form-control form-control-lg pr-5 mr-5" />
+								</h:panelGrid>
+
+								<h:panelGrid columns="1" class="mr-2 ">
+									<h:outputLabel value="CPF: " />
+									<h:inputText id="inputCPF"
+										value="#{usuarioController.usuario.cpf}"
 										styleClass="form-control form-control-lg pr-5 mr-5" />
 								</h:panelGrid>
 
@@ -87,8 +88,46 @@
 										style="width: 480px;">
 										<f:selectItem itemLabel="Selecione ...." />
 										<f:selectItems value="#{usuarioController.listaSexo}"
-											var="sexo" itemLabel="#{sexo.label}"
-											itemValue="#{sexo}" />
+											var="sexo" itemLabel="#{sexo.label}" itemValue="#{sexo}" />
+									</h:selectOneMenu>
+								</h:panelGrid>
+							</h:panelGrid>
+							
+							<h4 class="text-center wdi-red font-weight-bold">Endereço</h4>
+
+							<h:panelGrid columns="1" class="mr-2 ">
+								<h:outputLabel value="Rua: " />
+								<h:inputText id="inputRua"
+									value="#{usuarioController.usuario.endereco.rua}"
+									styleClass="form-control form-control-lg pr-5 mr-5" />
+							</h:panelGrid>
+							<h:panelGrid columns="1" class="mr-2 ">
+								<h:outputLabel value="Numero: " />
+								<h:inputText id="inputNumero"
+									value="#{usuarioController.usuario.endereco.numero}"
+									styleClass="form-control form-control-lg pr-5 mr-5" />
+							</h:panelGrid>
+							<h:panelGrid columns="1" class="mr-2 ">
+								<h:outputLabel value="Bairro: " />
+								<h:inputText id="inputBairro"
+									value="#{usuarioController.usuario.endereco.bairro}"
+									styleClass="form-control form-control-lg pr-5 mr-5" />
+							</h:panelGrid>
+							<h:panelGrid columns="1" class="mr-2 ">
+								<h:outputLabel value="Cidade: " />
+								<h:inputText id="inputCidade"
+									value="#{usuarioController.usuario.endereco.cidade}"
+									styleClass="form-control form-control-lg pr-5 mr-5" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:panelGrid class="mr-2" columns="1">
+									<h:outputLabel value="Estado: " />
+									<h:selectOneMenu value="#{usuarioController.usuario.endereco.estados}"
+										styleClass="form-control form-control-lg pr-5 mr-5 "
+										style="width: 480px;">
+										<f:selectItem itemLabel="Selecione ...." />
+										<f:selectItems value="#{usuarioController.listaEstado}"
+											var="estado" itemLabel="#{estado.sigla}" itemValue="#{estado}" />
 									</h:selectOneMenu>
 								</h:panelGrid>
 							</h:panelGrid>
@@ -101,7 +140,6 @@
 								styleClass="btn btn-lg btn-block btn-login mt-4">
 								<f:ajax render="formPrincipal" execute="panelPrincipal"
 									resetValues="true" />
-
 							</h:commandButton>
 						</h:panelGrid>
 					</div>
@@ -109,13 +147,6 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script src="js/bootstrap.min.js"></script>
 </h:body>
 
 </html>
