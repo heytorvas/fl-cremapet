@@ -2,6 +2,8 @@ package br.unitins.cremapet.controller;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
@@ -21,11 +23,21 @@ public class ServicoController implements Serializable {
 
 	private Servico servico;
 
+	private List<Servico> listaServico;
+
+	public List<Servico> getListaServico() {
+		if (listaServico == null) {
+			DAO<Servico> dao = new ServicoDAO();
+			listaServico = dao.findAll();
+			if (listaServico == null)
+				listaServico = new ArrayList<Servico>();
+		}
+		return listaServico;
+	}
+
 	public ServicoController() {
-		Flash flash = FacesContext.
-				getCurrentInstance().
-				getExternalContext().getFlash();
-		flash.keep("produtoFlash");
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.keep("servicoFlash");
 		servico = (Servico) flash.get("servicoFlash");
 	}
 
@@ -77,6 +89,14 @@ public class ServicoController implements Serializable {
 			dao.closeConnection();
 		}
 	}
+	
+	public void editar(Servico servico) {
+		ServicoDAO dao = new ServicoDAO();
+		// buscando um usuario pelo id
+		Servico ser = dao.findById(servico.getId());
+		setServico(ser);
+//		setUsuario(dao.findId(usuario.getId()));
+	}
 
 	public Servico getServico() {
 		if (servico == null) {
@@ -85,7 +105,7 @@ public class ServicoController implements Serializable {
 		return servico;
 	}
 
-	public void setProduto(Servico servico) {
+	public void setServico(Servico servico) {
 		this.servico = servico;
 	}
 
