@@ -41,13 +41,13 @@ public class LoginController {
 			//administrador
 			if(usuario.getPerfil().equals(getUsuario().getPerfil().valueOf(1))) {
 				Session.getInstance().setAttribute("usuarioLogado", usuario);
-				return "usuario.xhtml?faces-redirect=true";
+				return "menuadm.xhtml?faces-redirect=true";
 			}
 			
 			//funcionario
 			if(usuario.getPerfil().equals(getUsuario().getPerfil().valueOf(2))) {
 				Session.getInstance().setAttribute("usuarioLogado", usuario);
-				return "cliente.xhtml?faces-redirect=true";
+				return "menufunc.xhtml?faces-redirect=true";
 			}
 			
 		}
