@@ -59,15 +59,6 @@
 								</h:panelGrid>
 							</h:panelGrid>
 							<h:panelGrid columns="1">
-
-								<h:panelGrid columns="1" class="mr-2 ">
-									<h:outputLabel value="Senha: " />
-									<h:inputSecret value="#{clienteController.cliente.senha}"
-										styleClass="form-control form-control-lg pr-5 mr-5"
-										maxlength="60" size="60" />
-								</h:panelGrid>
-							</h:panelGrid>
-							<h:panelGrid columns="1">
 								<h:panelGrid class="mr-2" columns="1">
 									<h:outputLabel value="Sexo: " />
 									<h:selectOneMenu value="#{clienteController.cliente.sexo}"
@@ -79,7 +70,7 @@
 									</h:selectOneMenu>
 								</h:panelGrid>
 							</h:panelGrid>
-							
+
 							<h4 class="text-center wdi-red font-weight-bold">Endereço</h4>
 
 							<h:panelGrid columns="1" class="mr-2 ">
@@ -109,12 +100,14 @@
 							<h:panelGrid columns="1">
 								<h:panelGrid class="mr-2" columns="1">
 									<h:outputLabel value="Estado: " />
-									<h:selectOneMenu value="#{clienteController.cliente.endereco.estados}"
+									<h:selectOneMenu
+										value="#{clienteController.cliente.endereco.estados}"
 										styleClass="form-control form-control-lg pr-5 mr-5 "
 										style="width: 480px;">
 										<f:selectItem itemLabel="Selecione ...." />
 										<f:selectItems value="#{clienteController.listaEstado}"
-											var="estado" itemLabel="#{estado.sigla}" itemValue="#{estado}" />
+											var="estado" itemLabel="#{estado.sigla}"
+											itemValue="#{estado}" />
 									</h:selectOneMenu>
 								</h:panelGrid>
 							</h:panelGrid>
@@ -128,7 +121,7 @@
 								<f:ajax render="formPrincipal" execute="panelPrincipal"
 									resetValues="true" />
 							</h:commandButton>
-							
+
 							<h:commandButton value="Alterar"
 								disabled="#{clienteController.cliente.id == null}"
 								actionListener="#{clienteController.alterar()}">
@@ -175,10 +168,6 @@
 								<h:column>
 									<f:facet name="header">Login</f:facet>
 									<h:outputLabel value="#{obj.login}" />
-								</h:column>
-								<h:column>
-									<f:facet name="header">Senha</f:facet>
-									<h:outputLabel value="#{obj.senha}" />
 								</h:column>
 								<h:column>
 									<f:facet name="header">Sexo</f:facet>

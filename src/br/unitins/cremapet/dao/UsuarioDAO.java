@@ -126,6 +126,9 @@ public class UsuarioDAO extends DAO<Usuario> {
 		stat.setInt(8, usuario.getId());
 			
 		stat.execute();
+		
+		EnderecoDAO dao = new EnderecoDAO(conn);
+		dao.update(usuario.getEndereco());
 			
 	}
 

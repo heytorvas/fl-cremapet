@@ -23,49 +23,6 @@ public class ClienteDAO extends DAO<Cliente>{
 	public ClienteDAO() {
 		super(null);
 	}
-	
-	public Cliente login(String login, String senha) {
-		
-		Connection conn = getConnection();
-		
-		try {
-			PreparedStatement stat = conn.prepareStatement(
-					"SELECT " +
-					"  id, " +
-					"  nome, " +
-					"  cpf, " +
-					"  login, " +
-					"  senha, " +
-					"  sexo " +
-					"FROM " +
-					"  public.cliente " +
-					"WHERE login = ? AND senha = ? ");
-			
-			stat.setString(1, login);
-			stat.setString(2, senha);
-			
-			ResultSet rs = stat.executeQuery();
-			
-			Cliente cliente = null;
-			
-			if(rs.next()) {
-				cliente = new Cliente();
-				cliente.setId(rs.getInt("id"));
-				cliente.setNome(rs.getString("nome"));
-				cliente.setCpf(rs.getString("cpf"));
-				cliente.setLogin(rs.getString("login"));
-				cliente.setSenha(rs.getString("senha"));
-				cliente.setSexo(Sexo.valueOf(rs.getInt("sexo")));
-			}
-			
-			return cliente;
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-		
-	}
 
 	@Override
 	public void create(Cliente cliente) throws SQLException {
@@ -75,14 +32,13 @@ public class ClienteDAO extends DAO<Cliente>{
 		PreparedStatement stat = conn.prepareStatement(
 				"INSERT INTO " +
 			    "public.cliente " +
-			    " (nome, cpf, login, senha, sexo) " +
+			    " (nome, cpf, login, sexo) " +
 				"VALUES " +
 			    " (?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
 		stat.setString(1, cliente.getNome());
 		stat.setString(2, cliente.getCpf());
 		stat.setString(3, cliente.getLogin());
-		stat.setString(4, cliente.getSenha());
-		stat.setInt(5, cliente.getSexo().getValue());
+		stat.setInt(4, cliente.getSexo().getValue());
 		
 		stat.execute();
 		
@@ -105,18 +61,19 @@ public class ClienteDAO extends DAO<Cliente>{
 			    " nome = ?, " +
 			    " cpf = ?, " +
 			    " login = ?, " +
-			    " senha = ?, " +
 			    " sexo = ? " +
 				"WHERE " +
 			    " id = ? ");
 		stat.setString(1, cliente.getNome());
 		stat.setString(2, cliente.getCpf());
 		stat.setString(3, cliente.getLogin());
-		stat.setString(4, cliente.getSenha());
-		stat.setInt(5, cliente.getSexo().getValue());
-		stat.setInt(6, cliente.getId());
+		stat.setInt(4, cliente.getSexo().getValue());
+		stat.setInt(5, cliente.getId());
 			
 		stat.execute();
+		
+		EnderecoDAO dao = new EnderecoDAO(conn);
+		dao.update(cliente.getEndereco());
 			
 	}
 
@@ -155,7 +112,6 @@ public class ClienteDAO extends DAO<Cliente>{
 					"  nome, " +
 					"  cpf, " +
 					"  login, " +
-					"  senha, " +
 					"  sexo " +
 					"FROM " +
 					"  public.cliente ");
@@ -169,7 +125,6 @@ public class ClienteDAO extends DAO<Cliente>{
 				cliente.setNome(rs.getString("nome"));
 				cliente.setCpf(rs.getString("cpf"));
 				cliente.setLogin(rs.getString("login"));
-				cliente.setSenha(rs.getString("senha"));
 				cliente.setSexo(Sexo.valueOf(rs.getInt("sexo")));
 				
 				listaCliente.add(cliente);
@@ -197,7 +152,6 @@ public class ClienteDAO extends DAO<Cliente>{
 					"  nome, " +
 					"  cpf, " +
 					"  login, " +
-					"  senha, " +
 					"  sexo " +
 					"FROM " +
 					"  public.cliente " +
@@ -215,7 +169,6 @@ public class ClienteDAO extends DAO<Cliente>{
 				cliente.setNome(rs.getString("nome"));
 				cliente.setCpf(rs.getString("cpf"));
 				cliente.setLogin(rs.getString("login"));
-				cliente.setSenha(rs.getString("senha"));
 				cliente.setSexo(Sexo.valueOf(rs.getInt("sexo")));
 				
 				EnderecoDAO dao = new EnderecoDAO(conn);

@@ -29,6 +29,7 @@ public class LoginController {
 		//usuario = new Usuario();
 	}
 	
+	@SuppressWarnings({ "static-access" })
 	public String logar() {
 		UsuarioDAO dao = new UsuarioDAO();
 		String hashSenha = Util.hashSHA256(getUsuario().getSenha());
@@ -36,8 +37,19 @@ public class LoginController {
 		
 		if (usuario != null) {
 			// armazenando um usuario na sessao
-			Session.getInstance().setAttribute("usuarioLogado", usuario);
-			return "cliente.xhtml?faces-redirect=true";
+			
+			//administrador
+			if(usuario.getPerfil().equals(getUsuario().getPerfil().valueOf(1))) {
+				Session.getInstance().setAttribute("usuarioLogado", usuario);
+				return "usuario.xhtml?faces-redirect=true";
+			}
+			
+			//funcionario
+			if(usuario.getPerfil().equals(getUsuario().getPerfil().valueOf(2))) {
+				Session.getInstance().setAttribute("usuarioLogado", usuario);
+				return "cliente.xhtml?faces-redirect=true";
+			}
+			
 		}
 		Util.addMessageError("Usuário ou Senha Inválido.");
 		return null;
