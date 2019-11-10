@@ -9,33 +9,33 @@
 	<ui:define name="conteudo">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-4">
-					<!-- Default form login -->
-					<form class="text-center border border-light p-5">
-						<h:form id="formPrincipal">
+				<form class="text-center border border-light p-5">
+					<h:form id="formPrincipal">
+						<div class="col-sm-3">
+							<!-- Default form login -->
 							<h:panelGrid id="panelPrincipal" columns="1">
 
-								<p class="h4 mb-4">Cliente</p>
+								<p class="h3 mb-4">Cliente</p>
 
 								<!-- Nome -->
-								<input type="text" id="inputNome" class="form-control mb-4"
-									placeholder="Nome"
+								<input style="margin-top: 1em;" type="text" id="inputNome"
+									class="form-control mb-4" placeholder="Nome"
 									jsf:value="#{clienteController.cliente.nome}" />
-								<br />
 								<!-- CPF -->
-								<input type="text" id="inputCPF" class="form-control mb-4"
-									placeholder="CPF" jsf:value="#{clienteController.cliente.cpf}" />
+								<input style="margin-top: 1em;" type="text" id="inputCPF"
+									class="form-control mb-4" placeholder="CPF"
+									jsf:value="#{clienteController.cliente.cpf}" />
 
 								<!-- Email -->
-								<input type="email" id="inputLogin" class="form-control mb-4"
-									placeholder="Email"
+								<input style="margin-top: 1em;" type="email" id="inputLogin"
+									class="form-control mb-4" placeholder="Email"
 									jsf:value="#{clienteController.cliente.login}" />
 
 								<!-- Sexo -->
-								<h:outputLabel value="Sexo: " />
+								<h:outputLabel style="margin-top:1em;" value="Sexo: " />
 								<h:selectOneMenu value="#{clienteController.cliente.sexo}"
-									styleClass="form-control form-control-lg pr-5 mr-5 "
-									style="width: 480px;">
+									styleClass="form-control espacamento form-control-lg pr-5 mr-5 "
+									style="width: 480px; margin-top:1em;">
 									<f:selectItem itemLabel="Selecione ...." />
 									<f:selectItems value="#{clienteController.listaSexo}"
 										var="sexo" itemLabel="#{sexo.label}" itemValue="#{sexo}" />
@@ -44,31 +44,31 @@
 								<p class="h4 mb-4">Endereço</p>
 
 								<!-- Rua -->
-								<input type="text" id="inputRua" class="form-control mb-4"
-									placeholder="Rua"
+								<input style="margin-top: 1em;" type="text" id="inputRua"
+									class="form-control mb-4" placeholder="Rua"
 									jsf:value="#{clienteController.cliente.endereco.rua}" />
 
 								<!-- Numero -->
-								<input type="text" id="inputNumero" class="form-control mb-4"
-									placeholder="Numero"
+								<input style="margin-top: 1em;" type="text" id="inputNumero"
+									class="form-control mb-4" placeholder="Numero"
 									jsf:value="#{clienteController.cliente.endereco.numero}" />
 
 								<!-- Bairro -->
-								<input type="text" id="inputBairro" class="form-control mb-4"
-									placeholder="Bairro"
+								<input style="margin-top: 1em;" type="text" id="inputBairro"
+									class="form-control mb-4" placeholder="Bairro"
 									jsf:value="#{clienteController.cliente.endereco.bairro}" />
 
 								<!-- Cidade -->
-								<input type="text" id="inputCidade" class="form-control mb-4"
-									placeholder="Cidade"
+								<input style="margin-top: 1em;" type="text" id="inputCidade"
+									class="form-control mb-4" placeholder="Cidade"
 									jsf:value="#{clienteController.cliente.endereco.cidade}" />
 
 								<!-- Estado -->
-								<h:outputLabel value="Estado: " />
+								<h:outputLabel style="margin-top:1em;" value="Estado: " />
 								<h:selectOneMenu
 									value="#{clienteController.cliente.endereco.estados}"
 									styleClass="form-control form-control-lg pr-5 mr-5 "
-									style="width: 480px;">
+									style="width: 480px; margin-top:1em;">
 									<f:selectItem itemLabel="Selecione ...." />
 									<f:selectItems value="#{clienteController.listaEstado}"
 										var="estado" itemLabel="#{estado.sigla}" itemValue="#{estado}" />
@@ -107,11 +107,46 @@
 								</h:panelGrid>
 							</p>
 
-
-						</h:form>
-					</form>
-					<!-- Default form login -->
-				</div>
+							<!-- Default form login -->
+						</div>
+						<div class="col-sm-3"></div>
+						<div class="col-sm-5">
+							<p class="h3 mb-4">Infos</p>
+							<h:panelGrid id="panelDataTable">
+								<h:dataTable id="dataTable"
+									value="#{clienteController.listaCliente}" var="obj"
+									styleClass="table" headerClass="table-header"
+									rowClasses="table-odd-row, table-even-row">
+									<h:column>
+										<f:facet name="header">Id</f:facet>
+										<h:outputLabel value="#{obj.id}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Nome</f:facet>
+										<h:commandLink value="#{obj.nome}" style="color: black;"
+											actionListener="#{clienteController.editar(obj)}">
+											<f:ajax
+												render="formPrincipal:panelPrincipal formPrincipal:panelBotoes"
+												execute="formPrincipal:dataTable" />
+										</h:commandLink>
+									</h:column>
+									<h:column>
+										<f:facet name="header">CPF</f:facet>
+										<h:outputLabel value="#{obj.cpf}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Login</f:facet>
+										<h:outputLabel value="#{obj.login}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Sexo</f:facet>
+										<h:outputLabel value="#{obj.sexo.label}" />
+									</h:column>
+								</h:dataTable>
+							</h:panelGrid>
+						</div>
+					</h:form>
+				</form>
 			</div>
 
 		</div>
