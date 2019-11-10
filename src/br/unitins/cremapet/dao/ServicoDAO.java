@@ -125,5 +125,44 @@ public class ServicoDAO extends DAO<Servico> {
 		return null;
 	}
 
+	public List<Servico> findByNome(String nome) {
+		Connection conn = getConnection();
+		if (conn == null) 
+			return null;
+		
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " +
+					"  id, " +
+					"  descricao, " +
+					"  valor " +
+					"FROM " +
+					"  public.servico " +
+					"WHERE " +
+					"  nome ilike ? ");
+			
+			stat.setString(1, nome == null ? "%" : "%"+nome+"%");
+			ResultSet rs = stat.executeQuery();
+			
+			List<Servico> listaServico = new ArrayList<Servico>();
+			
+			while(rs.next()) {
+				Servico servico = new Servico();
+				servico.setId(rs.getInt("id"));
+				servico.setDescricao(rs.getString("descricao"));
+				servico.setValor(rs.getDouble("valor"));
+				
+				listaServico.add(servico);
+			}
+			
+			if (listaServico.isEmpty())
+				return null;
+			return listaServico;
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

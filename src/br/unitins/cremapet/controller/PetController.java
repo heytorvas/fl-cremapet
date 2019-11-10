@@ -9,9 +9,11 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.cremapet.application.Util;
+import br.unitins.cremapet.dao.ClienteDAO;
 import br.unitins.cremapet.dao.DAO;
 import br.unitins.cremapet.dao.PetDAO;
 import br.unitins.cremapet.model.Sexo;
+import br.unitins.cremapet.model.Cliente;
 import br.unitins.cremapet.model.Pet;
 
 @Named

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import br.unitins.cremapet.model.Cliente;
 import br.unitins.cremapet.model.Pet;
 import br.unitins.cremapet.model.Sexo;
 import br.unitins.cremapet.model.Pet;

@@ -70,7 +70,7 @@
 								<f:ajax render="formPrincipal" execute="panelPrincipal"
 									resetValues="true" />
 							</h:commandButton>
-							
+
 							<h:commandButton value="Alterar"
 								disabled="#{petController.pet.id == null}"
 								actionListener="#{petController.alterar()}">
@@ -91,9 +91,8 @@
 					</div>
 					<div class="datatable-row">
 						<h:panelGrid id="panelDataTable">
-							<h:dataTable id="dataTable"
-								value="#{petController.listaPet}" var="obj"
-								styleClass="table" headerClass="table-header"
+							<h:dataTable id="dataTable" value="#{petController.listaPet}"
+								var="obj" styleClass="table" headerClass="table-header"
 								rowClasses="table-odd-row, table-even-row">
 								<h:column>
 									<f:facet name="header">Id</f:facet>
@@ -117,7 +116,7 @@
 									<h:outputLabel value="#{obj.animal}" />
 								</h:column>
 								<h:column>
-									<f:facet name="header">Valor</f:facet>
+									<f:facet name="header">Raca</f:facet>
 									<h:outputLabel value="#{obj.raca}" />
 								</h:column>
 							</h:dataTable>
