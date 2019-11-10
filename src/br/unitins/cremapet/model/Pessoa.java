@@ -8,7 +8,7 @@ public abstract class Pessoa {
 	
 	private Integer id;
 
-	@NotEmpty(message = "O campo nome não pode ser vazio")
+	@NotEmpty(message = "O campo nome nï¿½o pode ser vazio")
 	@Size(max = 60, message = "O campo nome deve conter no maximo 60 caracteres")
 	private String nome;
 	
@@ -69,7 +69,7 @@ public abstract class Pessoa {
 	}
 
 	public Pessoa(Integer id,
-			@NotEmpty(message = "O campo nome não pode ser vazio") @Size(max = 60, message = "O campo nome deve conter no maximo 60 caracteres") String nome,
+			@NotEmpty(message = "O campo nome nï¿½o pode ser vazio") @Size(max = 60, message = "O campo nome deve conter no maximo 60 caracteres") String nome,
 			String cpf, @Email String login,
 			@Size(min = 6, max = 30, message = "A senha deve conter entre 6 e 30 caracteres") String senha, Sexo sexo,
 			Endereco endereco) {

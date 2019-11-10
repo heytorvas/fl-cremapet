@@ -44,8 +44,6 @@ public class ClienteController implements Serializable{
 //				String hashSenha = Util.hashSHA256(getUsuario().getSenha());
 //				getUsuario().setSenha(hashSenha);
 				
-				getCliente().setSenha(Util.hashSHA256(getCliente().getSenha()));
-				
 				dao.create(getCliente());
 				dao.getConnection().commit();
 				Util.addMessageInfo("Inclus�o realizada com sucesso.");
@@ -65,8 +63,8 @@ public class ClienteController implements Serializable{
 			DAO<Cliente> dao = new ClienteDAO();
 			// faz a alteracao no banco de dados
 			try {
-				// gerando um hash da senha
-				getCliente().setSenha(Util.hashSHA256(getCliente().getSenha()));
+//				// gerando um hash da senha
+//				getCliente().setSenha(Util.hashSHA256(getCliente().getSenha()));
 				dao.update(getCliente());
 				dao.getConnection().commit();
 				Util.addMessageInfo("Altera��o realizada com sucesso.");
@@ -106,15 +104,15 @@ public class ClienteController implements Serializable{
 	}
 
 	private boolean validarDados() {
-//		if (getUsuario().getSenha().isBlank()) {
-//			Util.addMessageWarn("O campo senha deve ser informado.");
+////		if (getUsuario().getSenha().isBlank()) {
+////			Util.addMessageWarn("O campo senha deve ser informado.");
+////			return false;
+////		}
+//		if (getCliente().getSenha() == null || 
+//				getCliente().getSenha().trim().equals("") ) {
+//			Util.addMessageError("O campo senha deve ser informado.");
 //			return false;
 //		}
-		if (getCliente().getSenha() == null || 
-				getCliente().getSenha().trim().equals("") ) {
-			Util.addMessageError("O campo senha deve ser informado.");
-			return false;
-		}
 		return true;
 	}
 	

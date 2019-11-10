@@ -10,9 +10,14 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 public class Util {
 	
-	public static void main(String[] args) {
-		System.out.println(DigestUtils.sha256Hex("asldkjfa;lskdjf;laksjdflaksjdflkjas;dlkfja;lskdjf;alksjdf;lkasjdf;lkasjd;flkjasd;lkfjas;dlkjfa;sldkjf;laksdjf;lkasjd;flkjasd;lkjf;lasdkjf;laksjdf;lkjasd;lkfjas;dlkj"));
-	}
+	public static void redirect(String url) {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+		} catch (IOException e) {
+			addMessageError("Erro ao redirecionar a pagina.");
+			e.printStackTrace();
+		}
+}
 	
 	public static String hashSHA256(String valor) {
 		return DigestUtils.sha256Hex(valor);

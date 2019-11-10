@@ -26,26 +26,33 @@
 				<ui:insert name="menu">
 					<h:form>
 						<ul class="sidebar-nav">
-							<li><h:commandLink class="botao">
+							<li><h:commandLink class="botao"
+									disabled="#{templateController.usuarioLogado.perfil.value == 2 || templateController.usuarioLogado.perfil.value == 1}">
 									<span style="font-size: 3.5rem;">CREMAPET</span>
-								</h:commandLink ></li>
-							<li><h:commandLink class="botao">
-									<span style="font-size: 2.5rem;">Olá, #{templateController.usuarioLogado.nome}!</span>
 								</h:commandLink></li>
-							<li><h:commandLink  class="botao"
-									disabled="#{templateController.usuarioLogado.perfil.value == 1}">
+							<li><h:commandLink class="botao"
+									disabled="#{templateController.usuarioLogado.perfil.value == 2 || templateController.usuarioLogado.perfil.value == 1}">
+									<span style="font-size: 2.5rem;">Olá,
+										#{templateController.usuarioLogado.nome}!</span>
+								</h:commandLink></li>
+							<li><h:commandLink class="botao"
+									disabled="#{templateController.usuarioLogado.perfil.value == 2}"
+									actionListener="#{templateController.redirectUsuario()}">
 									<i></i>
-									<span>Cadastro de Usuario</span>
-								</h:commandLink ></li>
-							<li><h:commandLink class="botao">
+									<span>Cadastro de Usuário</span>
+								</h:commandLink></li>
+							<li><h:commandLink class="botao"
+									actionListener="#{templateController.redirectCliente()}">
 									<i></i>
 									<span>Cadastro de Cliente</span>
-								</h:commandLink ></li>
-							<li><h:commandLink class="botao">
+								</h:commandLink></li>
+							<li><h:commandLink class="botao"
+									actionListener="#{templateController.redirectPet()}">
 									<i></i>
 									<span>Cadastro de Pet</span>
 								</h:commandLink></li>
-							<li><h:commandLink class="botao">
+							<li><h:commandLink class="botao"
+									action="#{templateController.encerrarSessao}">
 									<i></i>
 									<span>Sair</span>
 								</h:commandLink></li>

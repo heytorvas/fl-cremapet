@@ -34,7 +34,7 @@ public class ClienteDAO extends DAO<Cliente>{
 			    "public.cliente " +
 			    " (nome, cpf, login, sexo) " +
 				"VALUES " +
-			    " (?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
+			    " (?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
 		stat.setString(1, cliente.getNome());
 		stat.setString(2, cliente.getCpf());
 		stat.setString(3, cliente.getLogin());

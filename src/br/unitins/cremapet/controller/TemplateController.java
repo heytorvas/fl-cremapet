@@ -6,6 +6,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.cremapet.application.Session;
+import br.unitins.cremapet.application.Util;
 import br.unitins.cremapet.model.Usuario;
 
 @Named
@@ -33,6 +34,18 @@ public class TemplateController implements Serializable{
 	public String encerrarSessao() {
 		Session.getInstance().invalidateSession();
 		return "login.xhtml?faces-redirect=true";
+	}
+	
+	public void redirectUsuario() {
+		Util.redirect("usuario.xhtml");
+	}
+	
+	public void redirectCliente() {
+		Util.redirect("cliente.xhtml");
+	}
+	
+	public void redirectPet() {
+		Util.redirect("pet.xhtml");
 	}
 
 }
