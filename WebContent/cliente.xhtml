@@ -3,175 +3,117 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <ui:composition template="template.xhtml">
 	<ui:define name="conteudo">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+					<!-- Default form login -->
+					<form class="text-center border border-light p-5">
+						<h:form id="formPrincipal">
+							<h:panelGrid id="panelPrincipal" columns="1">
 
-		<div class="container d-flex justify-content-center mt-5">
-			<div class="row justify-content-md-center">
-				<div class="col-md-6 col-md-auto login-box">
-					<h:messages styleClass="alert alert-danger hmessages" />
+								<p class="h4 mb-4">Cliente</p>
 
-					<h4 class="text-center wdi-red font-weight-bold">Cadastro</h4>
-					<hr />
-					<h:form id="formPrincipal">
-						<div class="form-row">
-							<h:messages id="messages" infoStyle="color:green"
-								warnStyle="color:orange" errorStyle="color:red"
-								globalOnly="false" />
-							<h:panelGrid id="panelPrincipal" columns="1"
-								style="width: 1150px;">
-								<h:panelGrid columns="2">
+								<!-- Nome -->
+								<input type="text" id="inputNome" class="form-control mb-4"
+									placeholder="Nome"
+									jsf:value="#{clienteController.cliente.nome}" />
+								<br />
+								<!-- CPF -->
+								<input type="text" id="inputCPF" class="form-control mb-4"
+									placeholder="CPF" jsf:value="#{clienteController.cliente.cpf}" />
 
-									<h:panelGrid columns="1" class="mr-2 ">
-										<h:outputLabel value="Nome: " />
-										<h:inputText id="inputNome"
-											value="#{clienteController.cliente.nome}"
-											styleClass="form-control form-control-lg pr-5 mr-5" />
-									</h:panelGrid>
+								<!-- Email -->
+								<input type="email" id="inputLogin" class="form-control mb-4"
+									placeholder="Email"
+									jsf:value="#{clienteController.cliente.login}" />
 
-									<h:panelGrid columns="1" class="mr-2 ">
-										<h:outputLabel value="CPF: " />
-										<h:inputText id="inputCPF"
-											value="#{clienteController.cliente.cpf}"
-											styleClass="form-control form-control-lg pr-5 mr-5" />
-									</h:panelGrid>
+								<!-- Sexo -->
+								<h:outputLabel value="Sexo: " />
+								<h:selectOneMenu value="#{clienteController.cliente.sexo}"
+									styleClass="form-control form-control-lg pr-5 mr-5 "
+									style="width: 480px;">
+									<f:selectItem itemLabel="Selecione ...." />
+									<f:selectItems value="#{clienteController.listaSexo}"
+										var="sexo" itemLabel="#{sexo.label}" itemValue="#{sexo}" />
+								</h:selectOneMenu>
 
+								<p class="h4 mb-4">Endereço</p>
 
-									<h:panelGrid columns="1" class="mr-2 ">
-										<h:outputLabel value="Login: " />
-										<h:panelGrid columns="2">
-											<h:inputText id="inputLogin"
-												value="#{clienteController.cliente.login}"
-												requiredMessage="O campo login não pode ser nulo."
-												styleClass="form-control form-control-lg pr-5 mr-5">
-												<f:validateRequired />
-											</h:inputText>
-											<h:message for="inputLogin" style="color:red" />
-										</h:panelGrid>
-									</h:panelGrid>
-								</h:panelGrid>
-								<h:panelGrid columns="1">
-									<h:panelGrid class="mr-2" columns="1">
-										<h:outputLabel value="Sexo: " />
-										<h:selectOneMenu value="#{clienteController.cliente.sexo}"
-											styleClass="form-control form-control-lg pr-5 mr-5 "
-											style="width: 480px;">
-											<f:selectItem itemLabel="Selecione ...." />
-											<f:selectItems value="#{clienteController.listaSexo}"
-												var="sexo" itemLabel="#{sexo.label}" itemValue="#{sexo}" />
-										</h:selectOneMenu>
-									</h:panelGrid>
-								</h:panelGrid>
+								<!-- Rua -->
+								<input type="text" id="inputRua" class="form-control mb-4"
+									placeholder="Rua"
+									jsf:value="#{clienteController.cliente.endereco.rua}" />
 
-								<h4 class="text-center wdi-red font-weight-bold">Endereço</h4>
+								<!-- Numero -->
+								<input type="text" id="inputNumero" class="form-control mb-4"
+									placeholder="Numero"
+									jsf:value="#{clienteController.cliente.endereco.numero}" />
 
-								<h:panelGrid columns="1" class="mr-2 ">
-									<h:outputLabel value="Rua: " />
-									<h:inputText id="inputRua"
-										value="#{clienteController.cliente.endereco.rua}"
-										styleClass="form-control form-control-lg pr-5 mr-5" />
-								</h:panelGrid>
-								<h:panelGrid columns="1" class="mr-2 ">
-									<h:outputLabel value="Numero: " />
-									<h:inputText id="inputNumero"
-										value="#{clienteController.cliente.endereco.numero}"
-										styleClass="form-control form-control-lg pr-5 mr-5" />
-								</h:panelGrid>
-								<h:panelGrid columns="1" class="mr-2 ">
-									<h:outputLabel value="Bairro: " />
-									<h:inputText id="inputBairro"
-										value="#{clienteController.cliente.endereco.bairro}"
-										styleClass="form-control form-control-lg pr-5 mr-5" />
-								</h:panelGrid>
-								<h:panelGrid columns="1" class="mr-2 ">
-									<h:outputLabel value="Cidade: " />
-									<h:inputText id="inputCidade"
-										value="#{clienteController.cliente.endereco.cidade}"
-										styleClass="form-control form-control-lg pr-5 mr-5" />
-								</h:panelGrid>
-								<h:panelGrid columns="1">
-									<h:panelGrid class="mr-2" columns="1">
-										<h:outputLabel value="Estado: " />
-										<h:selectOneMenu
-											value="#{clienteController.cliente.endereco.estados}"
-											styleClass="form-control form-control-lg pr-5 mr-5 "
-											style="width: 480px;">
-											<f:selectItem itemLabel="Selecione ...." />
-											<f:selectItems value="#{clienteController.listaEstado}"
-												var="estado" itemLabel="#{estado.sigla}"
-												itemValue="#{estado}" />
-										</h:selectOneMenu>
-									</h:panelGrid>
-								</h:panelGrid>
+								<!-- Bairro -->
+								<input type="text" id="inputBairro" class="form-control mb-4"
+									placeholder="Bairro"
+									jsf:value="#{clienteController.cliente.endereco.bairro}" />
+
+								<!-- Cidade -->
+								<input type="text" id="inputCidade" class="form-control mb-4"
+									placeholder="Cidade"
+									jsf:value="#{clienteController.cliente.endereco.cidade}" />
+
+								<!-- Estado -->
+								<h:outputLabel value="Estado: " />
+								<h:selectOneMenu
+									value="#{clienteController.cliente.endereco.estados}"
+									styleClass="form-control form-control-lg pr-5 mr-5 "
+									style="width: 480px;">
+									<f:selectItem itemLabel="Selecione ...." />
+									<f:selectItems value="#{clienteController.listaEstado}"
+										var="estado" itemLabel="#{estado.sigla}" itemValue="#{estado}" />
+								</h:selectOneMenu>
 							</h:panelGrid>
-							<h:panelGrid class="text-center" id="panelBotoes" columns="4"
-								style="width: 530px;">
-								<h:commandButton value="Incluir"
-									disabled="#{clienteController.cliente.id != null}"
-									actionListener="#{clienteController.incluir()}"
-									styleClass="btn btn-lg btn-block btn-login mt-4">
-									<f:ajax render="formPrincipal" execute="panelPrincipal"
-										resetValues="true" />
-								</h:commandButton>
 
-								<h:commandButton value="Alterar"
-									disabled="#{clienteController.cliente.id == null}"
-									actionListener="#{clienteController.alterar()}">
-									<f:ajax render="formPrincipal messages" execute="formPrincipal" />
-								</h:commandButton>
+							<p class="h4 mb-4">
+								<h:panelGrid columns="4">
+									<h:commandButton value="Incluir"
+										disabled="#{clienteController.cliente.id != null}"
+										actionListener="#{clienteController.incluir()}"
+										styleClass="btn btn-info btn-block my-4">
+										<f:ajax render="formPrincipal" execute="panelPrincipal"
+											resetValues="true" />
+									</h:commandButton>
+									<h:commandButton value="Alterar"
+										disabled="#{clienteController.cliente.id == null}"
+										actionListener="#{clienteController.alterar()}"
+										styleClass="btn btn-info btn-block my-4">
+										<f:ajax render="formPrincipal messages"
+											execute="formPrincipal" />
+									</h:commandButton>
+									<h:commandButton value="Excluir"
+										disabled="#{clienteController.cliente.id == null}"
+										actionListener="#{clienteController.excluir()}"
+										styleClass="btn btn-info btn-block my-4">
+										<f:ajax render="@all" execute="@this" />
+									</h:commandButton>
+									<h:commandButton value="Limpar"
+										actionListener="#{clienteController.limpar()}"
+										styleClass="btn btn-info btn-block my-4">
+										<f:ajax
+											render="formPrincipal inputNome inputCPF inputLogin inputRua inputNumero inputBairro inputCidade"
+											execute="@this" resetValues="true" />
+									</h:commandButton>
+								</h:panelGrid>
+							</p>
 
-								<h:commandButton value="Excluir"
-									disabled="#{clienteController.cliente.id == null}"
-									actionListener="#{clienteController.excluir()}">
-									<f:ajax render="@all" execute="@this" />
-								</h:commandButton>
 
-								<h:commandButton value="Limpar"
-									action="#{clienteController.limpar()}">
-									<f:ajax
-										render="formPrincipal inputNome inputCPF inputLogin inputRua inputNumero inputBairro inputCidade"
-										execute="@this" resetValues="true" />
-								</h:commandButton>
-							</h:panelGrid>
-						</div>
-						<div class="datatable-row">
-							<h:panelGrid id="panelDataTable">
-								<h:dataTable id="dataTable"
-									value="#{clienteController.listaCliente}" var="obj"
-									styleClass="table" headerClass="table-header"
-									rowClasses="table-odd-row, table-even-row">
-									<h:column>
-										<f:facet name="header">Id</f:facet>
-										<h:outputLabel value="#{obj.id}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">Nome</f:facet>
-										<h:commandLink value="#{obj.nome}" style="color: black;"
-											actionListener="#{clienteController.editar(obj)}">
-											<f:ajax
-												render="formPrincipal:panelPrincipal formPrincipal:panelBotoes"
-												execute="formPrincipal:dataTable" />
-										</h:commandLink>
-									</h:column>
-									<h:column>
-										<f:facet name="header">CPF</f:facet>
-										<h:outputLabel value="#{obj.cpf}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">Login</f:facet>
-										<h:outputLabel value="#{obj.login}" />
-									</h:column>
-									<h:column>
-										<f:facet name="header">Sexo</f:facet>
-										<h:outputLabel value="#{obj.sexo.label}" />
-									</h:column>
-								</h:dataTable>
-							</h:panelGrid>
-						</div>
-					</h:form>
+						</h:form>
+					</form>
+					<!-- Default form login -->
 				</div>
 			</div>
+
 		</div>
 	</ui:define>
 </ui:composition>
