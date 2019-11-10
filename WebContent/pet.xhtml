@@ -8,30 +8,31 @@
 	<ui:define name="conteudo">
 		<div class="container d-flex justify-content-center mt-5">
 			<div class="row justify-content-md-center">
-				<div class="col-md-6 col-md-auto login-box">
-					<h:messages styleClass="alert alert-danger hmessages" />
-
-					<h4 class="text-center wdi-red font-weight-bold">Cadastro</h4>
-					<hr />
-					<h:form id="formPrincipal">
+				<div class="col-md-5">
+					<h:form id="formPrincipal"
+						styleClass="text-center border border-light p-5">
 						<div class="form-row">
 							<h:messages id="messages" infoStyle="color:green"
 								warnStyle="color:orange" errorStyle="color:red"
 								globalOnly="false" />
-							<h:panelGrid id="panelPrincipal" columns="1"
-								style="width: 1150px;">
+							<h:panelGrid id="panelPrincipal" styleClass="form-row mb-4"
+								columns="1">
+								<h4 class="font-weight-bold">Cadastro de Pet</h4>
 								<h:panelGrid columns="2">
+
 									<h:panelGrid columns="1">
+
 										<h:panelGrid class="mr-2" columns="1">
 											<h:outputLabel value="Sexo: " />
 											<h:selectOneMenu value="#{petController.pet.sexo}"
 												styleClass="form-control form-control-lg pr-5 mr-5 "
-												style="width: 480px;">
+												style="width: 200px;">
 												<f:selectItem itemLabel="Selecione ...." />
 												<f:selectItems value="#{petController.listaSexo}" var="sexo"
 													itemLabel="#{sexo.label}" itemValue="#{sexo}" />
 											</h:selectOneMenu>
 										</h:panelGrid>
+
 									</h:panelGrid>
 
 									<h:panelGrid columns="1" class="mr-2 ">
@@ -40,21 +41,30 @@
 											styleClass="form-control form-control-lg pr-5 mr-5" />
 									</h:panelGrid>
 
+
+								</h:panelGrid>
+								<br />
+								<h:panelGrid columns="2">
 									<h:panelGrid columns="1" class="mr-2 ">
 										<h:outputLabel value="Animal: " />
 										<h:inputText id="inputAnimal"
 											value="#{petController.pet.animal}"
 											styleClass="form-control form-control-lg pr-5 mr-5" />
 									</h:panelGrid>
+
 									<h:panelGrid columns="1" class="mr-2 ">
-										<h:outputLabel value="Raca: " />
+										<h:outputLabel value="Raça: " />
 										<h:inputText id="inputRaca" value="#{petController.pet.raca}"
 											styleClass="form-control form-control-lg pr-5 mr-5" />
 									</h:panelGrid>
+
 								</h:panelGrid>
+
+
 							</h:panelGrid>
+							<br />
 							<h:panelGrid class="text-center" id="panelBotoes" columns="4"
-								style="width: 530px;">
+								style="width: 400px;">
 								<h:commandButton value="Incluir"
 									disabled="#{petController.pet.id != null}"
 									actionListener="#{petController.incluir()}">
@@ -76,11 +86,18 @@
 
 								<h:commandButton value="Limpar"
 									action="#{petController.limpar()}">
-									<f:ajax render="formPrincipal" execute="@this" />
+									<f:ajax
+										render="formPrincipal inputNome inputNome inputAnimal inputRaca"
+										execute="@this" resetValues="true" />
 								</h:commandButton>
 							</h:panelGrid>
 						</div>
-						<div class="datatable-row">
+					</h:form>
+				</div>
+				<div class="col-md-7">
+					<div class="datatable-row">
+						<h:form>
+							<h4 class="font-weight-bold">Infos</h4>
 							<h:panelGrid id="panelDataTable">
 								<h:dataTable id="dataTable" value="#{petController.listaPet}"
 									var="obj" styleClass="table" headerClass="table-header"
@@ -112,8 +129,8 @@
 									</h:column>
 								</h:dataTable>
 							</h:panelGrid>
-						</div>
-					</h:form>
+						</h:form>
+					</div>
 				</div>
 			</div>
 		</div>

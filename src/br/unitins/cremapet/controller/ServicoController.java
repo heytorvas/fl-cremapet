@@ -55,6 +55,7 @@ public class ServicoController implements Serializable {
 			Util.addMessageInfo("Erro ao incluir o Produto no Banco de Dados.");
 			e.printStackTrace();
 		}
+		Util.redirect("servico.xhtml");
 	}
 
 	public void alterar() {
@@ -71,6 +72,7 @@ public class ServicoController implements Serializable {
 			Util.addMessageInfo("Erro ao alterar o Usuário no Banco de Dados.");
 			e.printStackTrace();
 		}
+		Util.redirect("servico.xhtml");
 	}
 
 	public void excluir() {
@@ -88,6 +90,7 @@ public class ServicoController implements Serializable {
 		} finally {
 			dao.closeConnection();
 		}
+		Util.redirect("servico.xhtml");
 	}
 	
 	public void editar(Servico servico) {

@@ -8,18 +8,16 @@
 	<ui:define name="conteudo">
 		<div class="container d-flex justify-content-center mt-5">
 			<div class="row justify-content-md-center">
-				<div class="col-md-6 col-md-auto login-box">
-					<h:messages styleClass="alert alert-danger hmessages" />
-
-					<h4 class="text-center wdi-red font-weight-bold">Cadastro</h4>
-					<hr />
-					<h:form id="formPrincipal">
+				<div class="col-md-5">
+					<h:form id="formPrincipal"
+						styleClass="text-center border border-light p-5">
 						<div class="form-row">
 							<h:messages id="messages" infoStyle="color:green"
 								warnStyle="color:orange" errorStyle="color:red"
 								globalOnly="false" />
-							<h:panelGrid id="panelPrincipal" columns="1"
-								style="width: 1150px;">
+							<h:panelGrid id="panelPrincipal" styleClass="form-row mb-4"
+								columns="1">
+								<h4 class="font-weight-bold">Cadastro de Servico</h4>
 								<h:panelGrid columns="2">
 
 									<h:panelGrid columns="1" class="mr-2 ">
@@ -35,14 +33,17 @@
 											value="#{servicoController.servico.valor}"
 											styleClass="form-control form-control-lg pr-5 mr-5" />
 									</h:panelGrid>
+
+
 								</h:panelGrid>
+								<br />
 							</h:panelGrid>
+							<br />
 							<h:panelGrid class="text-center" id="panelBotoes" columns="4"
-								style="width: 530px;">
+								style="width: 400px;">
 								<h:commandButton value="Incluir"
 									disabled="#{servicoController.servico.id != null}"
-									actionListener="#{servicoController.incluir()}"
-									styleClass="btn btn-lg btn-block btn-login mt-4">
+									actionListener="#{servicoController.incluir()}">
 									<f:ajax render="formPrincipal" execute="panelPrincipal"
 										resetValues="true" />
 								</h:commandButton>
@@ -61,11 +62,17 @@
 
 								<h:commandButton value="Limpar"
 									action="#{servicoController.limpar()}">
-									<f:ajax render="formPrincipal" execute="@this" />
+									<f:ajax render="formPrincipal inputDescricao inputValor"
+										execute="@this" />
 								</h:commandButton>
 							</h:panelGrid>
 						</div>
-						<div class="datatable-row">
+					</h:form>
+				</div>
+				<div class="col-md-7">
+					<div class="datatable-row">
+						<h:form>
+							<h4 class="font-weight-bold">Infos</h4>
 							<h:panelGrid id="panelDataTable">
 								<h:dataTable id="dataTable"
 									value="#{servicoController.listaServico}" var="obj"
@@ -90,8 +97,8 @@
 									</h:column>
 								</h:dataTable>
 							</h:panelGrid>
-						</div>
-					</h:form>
+						</h:form>
+					</div>
 				</div>
 			</div>
 		</div>

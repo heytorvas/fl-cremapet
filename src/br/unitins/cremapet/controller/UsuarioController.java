@@ -81,6 +81,7 @@ public class UsuarioController implements Serializable {
 			}
 				
 		}
+		Util.redirect("usuario.xhtml");
 	}
 	
 	public void excluir() {

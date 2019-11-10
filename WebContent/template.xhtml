@@ -52,7 +52,12 @@
 									<span>Cadastro de Pet</span>
 								</h:commandLink></li>
 							<li><h:commandLink class="botao"
-									action="#{templateController.encerrarSessao}">
+									actionListener="#{templateController.redirectServico()}">
+									<i></i>
+									<span>Cadastro de Servico</span>
+								</h:commandLink></li>
+							<li><h:commandLink class="botao"
+									action="#{templateController.encerrarSessao()}">
 									<i></i>
 									<span>Sair</span>
 								</h:commandLink></li>

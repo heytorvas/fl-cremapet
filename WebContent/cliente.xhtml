@@ -3,43 +3,41 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <ui:composition template="template.xhtml">
 	<ui:define name="conteudo">
 		<div class="container d-flex justify-content-center mt-5">
 			<div class="row justify-content-md-center">
-				<div class="col-md-12 col-md-auto login-box">
-					<h:messages styleClass="alert alert-danger hmessages" />
-
-					<h4 class="text-center wdi-red font-weight-bold">Cadastro -
-						Cliente</h4>
-					<hr />
-					<h:form id="formPrincipal">
+				<div class="col-md-5">
+					<h:form id="formPrincipal"
+						styleClass="text-center border border-light p-5">
 						<div class="form-row">
 							<h:messages id="messages" infoStyle="color:green"
 								warnStyle="color:orange" errorStyle="color:red"
 								globalOnly="false" />
-							<h:panelGrid id="panelPrincipal" columns="1"
-								style="width: 1150px;">
-								<h:panelGrid columns="1">
+							<h:panelGrid id="panelPrincipal" styleClass="form-row mb-4"
+								columns="1">
+								<h4 class="font-weight-bold">Cadastro de Cliente</h4>
+								<h:panelGrid columns="2">
 
-									<h:panelGrid columns="2" class="mr-2 ">
+									<h:panelGrid columns="1" class="mr-2 ">
 										<h:outputLabel value="Nome: " />
 										<h:inputText id="inputNome"
 											value="#{clienteController.cliente.nome}"
 											styleClass="form-control form-control-lg pr-5 mr-5" />
 									</h:panelGrid>
 
-									<h:panelGrid columns="2" class="mr-2 ">
+									<h:panelGrid columns="1" class="mr-2 ">
 										<h:outputLabel value="CPF: " />
 										<h:inputText id="inputCPF"
 											value="#{clienteController.cliente.cpf}"
 											styleClass="form-control form-control-lg pr-5 mr-5" />
 									</h:panelGrid>
 
-
-									<h:panelGrid columns="2" class="mr-2 ">
+								</h:panelGrid>
+								<br />
+								<h:panelGrid columns="2">
+									<h:panelGrid columns="1" class="mr-2 ">
 										<h:outputLabel value="Login: " />
 										<h:panelGrid columns="2">
 											<h:inputText id="inputLogin"
@@ -51,53 +49,64 @@
 											<h:message for="inputLogin" style="color:red" />
 										</h:panelGrid>
 									</h:panelGrid>
+
+									<h:panelGrid columns="1">
+
+										<h:panelGrid class="mr-2" columns="1">
+											<h:outputLabel value="Sexo: " />
+											<h:selectOneMenu value="#{clienteController.cliente.sexo}"
+												styleClass="form-control form-control-lg pr-5 mr-5 "
+												style="width: 200px;">
+												<f:selectItem itemLabel="Selecione ...." />
+												<f:selectItems value="#{clienteController.listaSexo}"
+													var="sexo" itemLabel="#{sexo.label}" itemValue="#{sexo}" />
+											</h:selectOneMenu>
+										</h:panelGrid>
+
+									</h:panelGrid>
+
 								</h:panelGrid>
-								<h:panelGrid columns="1">
-									<h:panelGrid class="mr-2" columns="2">
-										<h:outputLabel value="Sexo: " />
-										<h:selectOneMenu value="#{clienteController.cliente.sexo}"
-											styleClass="form-control form-control-lg pr-5 mr-5 "
-											style="width: 480px;">
-											<f:selectItem itemLabel="Selecione ...." />
-											<f:selectItems value="#{clienteController.listaSexo}"
-												var="sexo" itemLabel="#{sexo.label}" itemValue="#{sexo}" />
-										</h:selectOneMenu>
+								<br />
+
+								<h4 class="font-weight-bold">Endereco</h4>
+
+								<h:panelGrid columns="2">
+									<h:panelGrid columns="1" class="mr-2 ">
+										<h:outputLabel value="Rua: " />
+										<h:inputText id="inputRua"
+											value="#{clienteController.cliente.endereco.rua}"
+											styleClass="form-control form-control-lg pr-5 mr-5" />
+									</h:panelGrid>
+									<h:panelGrid columns="1" class="mr-2 ">
+										<h:outputLabel value="Numero: " />
+										<h:inputText id="inputNumero"
+											value="#{clienteController.cliente.endereco.numero}"
+											styleClass="form-control form-control-lg pr-5 mr-5" />
 									</h:panelGrid>
 								</h:panelGrid>
-
-								<h4 class="text-center wdi-red font-weight-bold">Endereço</h4>
-
-								<h:panelGrid columns="2" class="mr-2 ">
-									<h:outputLabel value="Rua: " />
-									<h:inputText id="inputRua"
-										value="#{clienteController.cliente.endereco.rua}"
-										styleClass="form-control form-control-lg pr-5 mr-5" />
-								</h:panelGrid>
-								<h:panelGrid columns="2" class="mr-2 ">
-									<h:outputLabel value="Numero: " />
-									<h:inputText id="inputNumero"
-										value="#{clienteController.cliente.endereco.numero}"
-										styleClass="form-control form-control-lg pr-5 mr-5" />
-								</h:panelGrid>
-								<h:panelGrid columns="2" class="mr-2 ">
-									<h:outputLabel value="Bairro: " />
-									<h:inputText id="inputBairro"
-										value="#{clienteController.cliente.endereco.bairro}"
-										styleClass="form-control form-control-lg pr-5 mr-5" />
-								</h:panelGrid>
-								<h:panelGrid columns="2" class="mr-2 ">
-									<h:outputLabel value="Cidade: " />
-									<h:inputText id="inputCidade"
-										value="#{clienteController.cliente.endereco.cidade}"
-										styleClass="form-control form-control-lg pr-5 mr-5" />
-								</h:panelGrid>
+								<br />
 								<h:panelGrid columns="2">
+									<h:panelGrid columns="1" class="mr-2 ">
+										<h:outputLabel value="Bairro: " />
+										<h:inputText id="inputBairro"
+											value="#{clienteController.cliente.endereco.bairro}"
+											styleClass="form-control form-control-lg pr-5 mr-5" />
+									</h:panelGrid>
+									<h:panelGrid columns="1" class="mr-2 ">
+										<h:outputLabel value="Cidade: " />
+										<h:inputText id="inputCidade"
+											value="#{clienteController.cliente.endereco.cidade}"
+											styleClass="form-control form-control-lg pr-5 mr-5" />
+									</h:panelGrid>
+								</h:panelGrid>
+								<br />
+								<h:panelGrid columns="1">
 									<h:panelGrid class="mr-2" columns="1">
 										<h:outputLabel value="Estado: " />
 										<h:selectOneMenu
 											value="#{clienteController.cliente.endereco.estados}"
 											styleClass="form-control form-control-lg pr-5 mr-5 "
-											style="width: 480px;">
+											style="width: 200px;">
 											<f:selectItem itemLabel="Selecione ...." />
 											<f:selectItems value="#{clienteController.listaEstado}"
 												var="estado" itemLabel="#{estado.sigla}"
@@ -106,8 +115,9 @@
 									</h:panelGrid>
 								</h:panelGrid>
 							</h:panelGrid>
+							<br />
 							<h:panelGrid class="text-center" id="panelBotoes" columns="4"
-								style="width: 530px;">
+								style="width: 400px;">
 								<h:commandButton value="Incluir"
 									disabled="#{clienteController.cliente.id != null}"
 									actionListener="#{clienteController.incluir()}">
@@ -135,7 +145,12 @@
 								</h:commandButton>
 							</h:panelGrid>
 						</div>
-						<div class="datatable-row">
+					</h:form>
+				</div>
+				<div class="col-md-7">
+					<div class="datatable-row">
+						<h:form>
+							<h4 class="font-weight-bold">Infos</h4>
 							<h:panelGrid id="panelDataTable">
 								<h:dataTable id="dataTable"
 									value="#{clienteController.listaCliente}" var="obj"
@@ -168,12 +183,11 @@
 									</h:column>
 								</h:dataTable>
 							</h:panelGrid>
-						</div>
-					</h:form>
+						</h:form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</ui:define>
 </ui:composition>
-
 </html>

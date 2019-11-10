@@ -47,5 +47,9 @@ public class TemplateController implements Serializable{
 	public void redirectPet() {
 		Util.redirect("pet.xhtml");
 	}
+	
+	public void redirectServico() {
+		Util.redirect("servico.xhtml");
+	}
 
 }

@@ -78,6 +78,7 @@ public class ClienteController implements Serializable{
 			}
 				
 		}
+		Util.redirect("cliente.xhtml");
 	}
 	
 	public void excluir() {

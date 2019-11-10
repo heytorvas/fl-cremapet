@@ -72,7 +72,7 @@ public class PetController implements Serializable {
 			Util.addMessageInfo("Erro ao alterar o Usu�rio no Banco de Dados.");
 			e.printStackTrace();
 		}
-
+		Util.redirect("pet.xhtml");
 	}
 
 	public void excluir() {
