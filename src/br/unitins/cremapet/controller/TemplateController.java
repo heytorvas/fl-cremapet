@@ -51,5 +51,16 @@ public class TemplateController implements Serializable{
 	public void redirectServico() {
 		Util.redirect("servico.xhtml");
 	}
-
+	
+	public void redirectVenda() {
+		Util.redirect("venda.xhtml");
+	}
+	
+	public void redirectCarrinho() {
+		Util.redirect("carrinho.xhtml");
+	}
+	
+	public void redirectHistorico() {
+		Util.redirect("historico.xhtml");
+	}
 }

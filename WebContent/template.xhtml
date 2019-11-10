@@ -57,10 +57,26 @@
 									<span>Cadastro de Servico</span>
 								</h:commandLink></li>
 							<li><h:commandLink class="botao"
+									actionListener="#{templateController.redirectVenda()}">
+									<i></i>
+									<span>Vendas</span>
+								</h:commandLink></li>
+							<li><h:commandLink class="botao"
+									actionListener="#{templateController.redirectCarrinho()}">
+									<i></i>
+									<span>Carrinho</span>
+								</h:commandLink></li>
+							<li><h:commandLink class="botao"
+									actionListener="#{templateController.redirectHistorico()}">
+									<i></i>
+									<span>Histórico de Vendas</span>
+								</h:commandLink></li>
+							<li><h:commandLink class="botao"
 									action="#{templateController.encerrarSessao()}">
 									<i></i>
 									<span>Sair</span>
 								</h:commandLink></li>
+
 						</ul>
 					</h:form>
 				</ui:insert>

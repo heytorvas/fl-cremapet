@@ -11,6 +11,8 @@ public class Venda {
 	private Usuario usuario;
 	private List<ItemVenda> listaItemVenda;
 	
+	private Double totalVenda;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -42,5 +44,12 @@ public class Venda {
 		this.listaItemVenda = listaItemVenda;
 	}
 	
-	
+	public Double getTotalVenda() {
+		totalVenda = 0.0;
+		if (listaItemVenda != null)
+			for (ItemVenda itemVenda : listaItemVenda) 
+				totalVenda += itemVenda.getValor();
+		
+		return totalVenda;
+	}
 }
