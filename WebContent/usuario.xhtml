@@ -136,8 +136,7 @@
 								style="width: 530px;">
 								<h:commandButton value="Incluir"
 									disabled="#{usuarioController.usuario.id != null}"
-									actionListener="#{usuarioController.incluir()}"
-									styleClass="btn btn-lg btn-block btn-login mt-4">
+									actionListener="#{usuarioController.incluir()}">
 									<f:ajax render="formPrincipal" execute="panelPrincipal"
 										resetValues="true" />
 								</h:commandButton>

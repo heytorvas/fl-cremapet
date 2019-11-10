@@ -78,6 +78,7 @@ public class PetController implements Serializable {
 	public void excluir() {
 		if (excluir(getPet()))
 			limpar();
+		Util.redirect("pet.xhtml");
 	}
 
 	public boolean excluir(Pet usuario) {

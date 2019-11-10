@@ -57,8 +57,7 @@
 								style="width: 530px;">
 								<h:commandButton value="Incluir"
 									disabled="#{petController.pet.id != null}"
-									actionListener="#{petController.incluir()}"
-									styleClass="btn btn-lg btn-block btn-login mt-4">
+									actionListener="#{petController.incluir()}">
 									<f:ajax render="formPrincipal" execute="panelPrincipal"
 										resetValues="true" />
 								</h:commandButton>

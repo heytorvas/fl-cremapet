@@ -83,6 +83,7 @@ public class ClienteController implements Serializable{
 	public void excluir() {
 		if (excluir(getCliente()))
 			limpar();
+		Util.redirect("cliente.xhtml");
 	}
 	
 	public boolean excluir(Cliente cliente) {

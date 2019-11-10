@@ -86,6 +86,7 @@ public class UsuarioController implements Serializable {
 	public void excluir() {
 		if (excluir(getUsuario()))
 			limpar();
+		Util.redirect("usuario.xhtml");
 	}
 	
 	public boolean excluir(Usuario usuario) {
