@@ -10,9 +10,14 @@ import javax.inject.Named;
 
 import br.unitins.cremapet.application.Session;
 import br.unitins.cremapet.application.Util;
+import br.unitins.cremapet.dao.ClienteDAO;
+import br.unitins.cremapet.dao.DAO;
+import br.unitins.cremapet.dao.PetDAO;
 import br.unitins.cremapet.dao.ServicoDAO;
 import br.unitins.cremapet.dao.VendaDAO;
+import br.unitins.cremapet.model.Cliente;
 import br.unitins.cremapet.model.ItemVenda;
+import br.unitins.cremapet.model.Pet;
 import br.unitins.cremapet.model.Servico;
 import br.unitins.cremapet.model.Usuario;
 import br.unitins.cremapet.model.Venda;
@@ -24,6 +29,18 @@ public class CarrinhoController implements Serializable {
 	private static final long serialVersionUID = -1229885960428245332L;
 
 	private Venda venda;
+	
+	private List<Cliente> listaCliente;
+	
+	public List<Cliente> getlistaCliente() {
+		if (listaCliente == null) {
+			DAO<Cliente> dao = new ClienteDAO();
+			listaCliente = dao.findAll();
+			if (listaCliente == null)
+				listaCliente = new ArrayList<Cliente>();
+		}
+		return listaCliente;
+	}
 
 	public void adicionar(int id) {
 		// pesquisa o servico selecionado
@@ -69,14 +86,14 @@ public class CarrinhoController implements Serializable {
 		return venda;
 	}
 
-	public void remover(int idServico) {
+	public void remover(String descricao) {
 		// obtendo o carrinho da sessao
 		List<ItemVenda> carrinho = (List<ItemVenda>) Session.getInstance().getAttribute("carrinho");
 
 		// removendo o item do carrinho
 		for (ItemVenda itemVenda : carrinho) {
 
-			if (itemVenda.getServico().getId().equals(idServico)) {
+			if (itemVenda.getServico().getDescricao().equals(descricao)) {
 				carrinho.remove(itemVenda);
 				return;
 			}
@@ -89,12 +106,16 @@ public class CarrinhoController implements Serializable {
 		Usuario user = (Usuario) Session.getInstance().getAttribute("usuarioLogado");
 		getVenda().setUsuario(user);
 
-		getVenda().setUsuario((Usuario) Session.getInstance().getAttribute("usuarioLogado"));
+		//getVenda().setUsuario((Usuario) Session.getInstance().getAttribute("usuarioLogado"));
+		getVenda().setCliente(getVenda().getCliente());
 		VendaDAO dao = new VendaDAO();
 		try {
 			dao.create(getVenda());
+			dao.getConnection().commit();
+			limpar();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			dao.rollbackConnection();
+			dao.closeConnection();
 			e.printStackTrace();
 		}
 
@@ -105,6 +126,10 @@ public class CarrinhoController implements Serializable {
 
 	public void setVenda(Venda venda) {
 		this.venda = venda;
+	}
+	
+	public void limpar() {
+		venda = null;
 	}
 
 }

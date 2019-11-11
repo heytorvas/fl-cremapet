@@ -26,12 +26,16 @@ public class Venda {
 		this.data = data;
 	}
 	public Cliente getCliente() {
+		if (cliente == null)
+			cliente = new Cliente();
 		return cliente;
 	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 	public Usuario getUsuario() {
+		if (usuario == null)
+			usuario = new Usuario();
 		return usuario;
 	}
 	public void setUsuario(Usuario usuario) {
