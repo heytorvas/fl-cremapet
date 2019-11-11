@@ -20,12 +20,14 @@
 							styleClass="form-control form-control-lg pr-5 mr-5 "
 							style="width: 200px;">
 							<f:selectItem itemLabel="Selecione ...." />
-							<f:selectItems value="#{carrinhoController.listaCliente}"
-								var="e" itemLabel="#{e.nome}" itemValue="#{e.id}" />
+							<f:selectItems value="#{carrinhoController.listaCliente}" var="e"
+								itemLabel="#{e.nome}" itemValue="#{e.id}" />
 						</h:selectOneMenu>
 					</h:panelGrid>
 				</h:panelGrid>
-				
+
+				<br />
+
 				<h:panelGrid columns="1">
 					<h:panelGrid class="mr-2" columns="1">
 						<h:outputLabel value="Pet: " />
@@ -33,36 +35,46 @@
 							styleClass="form-control form-control-lg pr-5 mr-5 "
 							style="width: 200px;">
 							<f:selectItem itemLabel="Selecione ...." />
-							<f:selectItems value="#{carrinhoController.listaPet}"
-								var="e" itemLabel="#{e.nome}" itemValue="#{e.id}" />
+							<f:selectItems value="#{carrinhoController.listaPet}" var="e"
+								itemLabel="#{e.nome}" itemValue="#{e.id}" />
 						</h:selectOneMenu>
 					</h:panelGrid>
 				</h:panelGrid>
 
-				<h:dataTable value="#{carrinhoController.venda.listaItemVenda}"
-					var="obj">
-					<h:column>
-						<f:facet name="header">Descricao</f:facet>
-						<h:outputLabel value="#{obj.servico.descricao}" />
-					</h:column>
+				<br />
 
-					<h:column>
-						<f:facet name="header">Valor</f:facet>
-						<h:outputLabel value="#{obj.valor}">
-							<f:convertNumber locale="pt_BR" currencySymbol="R$"
-								type="currency" />
-						</h:outputLabel>
-					</h:column>
+				<h:panelGrid id="panelDataTable">
+					<h:dataTable id="dataTable"
+						value="#{carrinhoController.venda.listaItemVenda}" var="obj"
+						styleClass="table" headerClass="table-header"
+						rowClasses="table-odd-row, table-even-row">
+						<h:column>
+							<f:facet name="header">Id</f:facet>
+							<h:outputLabel value="#{obj.servico.id}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Descrição</f:facet>
+							<h:outputLabel value="#{obj.servico.descricao}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Valor</f:facet>
+							<h:outputLabel value="#{obj.valor}">
+								<f:convertNumber locale="pt_BR" currencySymbol="R$"
+									type="currency" />
+							</h:outputLabel>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Ação</f:facet>
+							<h:commandButton value="remover"
+								actionListener="#{carrinhoController.remover(obj.servico.descricao)}">
+								<f:ajax render="@form" execute="@this" />
+							</h:commandButton>
+						</h:column>
+					</h:dataTable>
+				</h:panelGrid>
 
-					<h:column>
-						<f:facet name="header">Ação</f:facet>
-						<h:commandButton value="remover"
-							actionListener="#{carrinhoController.remover(obj.servico.descricao)}">
-							<f:ajax render="@form" execute="@this" />
-						</h:commandButton>
-					</h:column>
+				<br />
 
-				</h:dataTable>
 				<h:commandButton value="Finalizar Venda"
 					actionListener="#{carrinhoController.finalizar}">
 					<f:ajax execute="@form" render="@form" />
