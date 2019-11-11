@@ -1,12 +1,14 @@
 package br.unitins.cremapet.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.cremapet.application.Session;
 import br.unitins.cremapet.application.Util;
+import br.unitins.cremapet.model.ItemVenda;
 import br.unitins.cremapet.model.Usuario;
 
 @Named
@@ -17,6 +19,8 @@ public class TemplateController implements Serializable{
 	
 	private Usuario usuarioLogado;
 
+	int qtdItensCarrinho;
+	
 	public Usuario getUsuarioLogado() {
 		if (usuarioLogado == null) {
 			// buscando o usuario da sessao
@@ -25,6 +29,15 @@ public class TemplateController implements Serializable{
 				usuarioLogado = new Usuario();
 		}
 		return usuarioLogado;
+	}
+	
+	public int getQtdItensCarrinho() {
+		qtdItensCarrinho = 0;
+		List<ItemVenda> itens = (List<ItemVenda>) Session.getInstance().getAttribute("carrinho");
+		if (itens != null)
+			qtdItensCarrinho = itens.size();
+		return qtdItensCarrinho;	
+		
 	}
 
 	public void setUsuarioLogado(Usuario usuarioLogado) {

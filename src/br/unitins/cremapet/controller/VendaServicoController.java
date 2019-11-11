@@ -64,7 +64,7 @@ public class VendaServicoController implements Serializable {
 		// atualizando o carrinho na sessao
 		Session.getInstance().setAttribute("carrinho", carrinho);
 		
-		Util.addMessageInfo("Produto adicionado no carrinho. "
+		Util.addMessageInfo("Servico adicionado no carrinho. "
 				+ "Quantidade de Itens: " + carrinho.size());
 		
 	}

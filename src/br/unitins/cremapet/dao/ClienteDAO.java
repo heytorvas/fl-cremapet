@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unitins.cremapet.application.Util;
 import br.unitins.cremapet.model.Cliente;
 import br.unitins.cremapet.model.Endereco;
 import br.unitins.cremapet.model.Perfil;
@@ -186,4 +187,48 @@ public class ClienteDAO extends DAO<Cliente>{
 		}
 		return null;
 	}
+	
+	
+	
+	public List<Cliente> findByNome(String nome) {
+		// verificando se tem uma conexao valida
+		Connection conn = getConnection();
+		if (conn == null) 
+			return null;
+		
+		List<Cliente> listaUsuario = new ArrayList<Cliente>();
+		
+		PreparedStatement stat = null;
+	
+		try {
+			stat = conn.prepareStatement("SELECT * FROM cliente WHERE nome ILIKE ?");
+			stat.setString(1, (nome == null? "%" : "%"+nome+"%"));
+			ResultSet rs = stat.executeQuery();
+			
+			while(rs.next()) {
+				Cliente cliente = new Cliente();
+				cliente.setId(rs.getInt("id"));
+				cliente.setNome(rs.getString("nome"));
+				cliente.setLogin(rs.getString("login"));
+				cliente.setCpf(rs.getString("cpf"));
+				cliente.setSexo(Sexo.valueOf(rs.getInt("sexo")));
+
+				listaUsuario.add(cliente);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Util.addMessageError("Falha ao consultar o Banco de Dados.");
+			listaUsuario = null;
+		} finally {
+			try {
+				stat.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return listaUsuario;
+	}
+	
+	
+	
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:jsf="http://java.sun.com/jsf/">
 
@@ -61,7 +62,7 @@
 									<i></i>
 									<span>Vendas</span>
 								</h:commandLink></li>
-							<li><h:commandLink class="botao"
+							<li><h:commandLink class="botao" id="qtd"
 									actionListener="#{templateController.redirectCarrinho()}">
 									<i></i>
 									<span>Carrinho</span>
@@ -76,8 +77,8 @@
 									<i></i>
 									<span>Sair</span>
 								</h:commandLink></li>
-
 						</ul>
+
 					</h:form>
 				</ui:insert>
 
