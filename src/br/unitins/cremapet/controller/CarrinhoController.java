@@ -32,6 +32,18 @@ public class CarrinhoController implements Serializable {
 	
 	private List<Cliente> listaCliente;
 	
+	private List<Pet> listaPet;
+	
+	public List<Pet> getlistaPet() {
+		if (listaPet == null) {
+			DAO<Pet> dao = new PetDAO();
+			listaPet = dao.findAll();
+			if (listaPet == null)
+				listaPet = new ArrayList<Pet>();
+		}
+		return listaPet;
+	}
+	
 	public List<Cliente> getlistaCliente() {
 		if (listaCliente == null) {
 			DAO<Cliente> dao = new ClienteDAO();
@@ -106,8 +118,10 @@ public class CarrinhoController implements Serializable {
 		Usuario user = (Usuario) Session.getInstance().getAttribute("usuarioLogado");
 		getVenda().setUsuario(user);
 
-		//getVenda().setUsuario((Usuario) Session.getInstance().getAttribute("usuarioLogado"));
 		getVenda().setCliente(getVenda().getCliente());
+		
+		getVenda().setPet(getVenda().getPet());
+		
 		VendaDAO dao = new VendaDAO();
 		try {
 			dao.create(getVenda());

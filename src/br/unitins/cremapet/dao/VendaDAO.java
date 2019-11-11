@@ -33,11 +33,12 @@ public class VendaDAO extends DAO<Venda> {
 
 		PreparedStatement stat = null;
 		try {
-			stat = conn.prepareStatement("INSERT INTO venda ( " + "  data, " + "  idcliente,"
-					+ "  idusuario ) " + "VALUES ( " + " ?, " + " ?, " + " ? ) ", Statement.RETURN_GENERATED_KEYS);
+			stat = conn.prepareStatement("INSERT INTO venda ( " + "  data, " + "  idcliente," + "  idpet,"
+					+ "  idusuario ) " + "VALUES ( " + " ?, " + " ?, " + " ?, " + " ? ) ", Statement.RETURN_GENERATED_KEYS);
 			stat.setDate(1, Date.valueOf(LocalDate.now()));
 			stat.setInt(2, venda.getCliente().getId());
-			stat.setInt(3, venda.getUsuario().getId());
+			stat.setInt(3, venda.getPet().getId());
+			stat.setInt(4, venda.getUsuario().getId());
 
 			stat.executeUpdate();
 			final ResultSet rs = stat.getGeneratedKeys();
@@ -89,6 +90,7 @@ public class VendaDAO extends DAO<Venda> {
 				venda.setData(rs.getDate("data").toLocalDate());
 				venda.setCliente(cliente);
 				venda.setUsuario(venda.getUsuario());
+				venda.setPet(venda.getPet());
 
 				// buscando os itensvenda de cada venda
 				ItemVendaDAO dao = new ItemVendaDAO();

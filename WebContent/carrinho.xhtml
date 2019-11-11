@@ -25,6 +25,19 @@
 						</h:selectOneMenu>
 					</h:panelGrid>
 				</h:panelGrid>
+				
+				<h:panelGrid columns="1">
+					<h:panelGrid class="mr-2" columns="1">
+						<h:outputLabel value="Pet: " />
+						<h:selectOneMenu value="#{carrinhoController.venda.pet.id}"
+							styleClass="form-control form-control-lg pr-5 mr-5 "
+							style="width: 200px;">
+							<f:selectItem itemLabel="Selecione ...." />
+							<f:selectItems value="#{carrinhoController.listaPet}"
+								var="e" itemLabel="#{e.nome}" itemValue="#{e.id}" />
+						</h:selectOneMenu>
+					</h:panelGrid>
+				</h:panelGrid>
 
 				<h:dataTable value="#{carrinhoController.venda.listaItemVenda}"
 					var="obj">

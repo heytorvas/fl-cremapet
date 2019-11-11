@@ -9,6 +9,7 @@ public class Venda {
 	private LocalDate data;
 	private Cliente cliente;
 	private Usuario usuario;
+	private Pet pet;
 	private List<ItemVenda> listaItemVenda;
 	
 	private Double totalVenda;
@@ -55,5 +56,15 @@ public class Venda {
 				totalVenda += itemVenda.getValor();
 		
 		return totalVenda;
+	}
+	
+	public Pet getPet() {
+		if (pet == null) {
+			pet = new Pet();
+		}
+		return pet;
+	}
+	public void setPet(Pet pet) {
+		this.pet = pet;
 	}
 }

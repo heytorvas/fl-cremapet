@@ -18,8 +18,6 @@ public class TemplateController implements Serializable{
 	private static final long serialVersionUID = -8903731526145538323L;
 	
 	private Usuario usuarioLogado;
-
-	int qtdItensCarrinho;
 	
 	public Usuario getUsuarioLogado() {
 		if (usuarioLogado == null) {
@@ -29,15 +27,6 @@ public class TemplateController implements Serializable{
 				usuarioLogado = new Usuario();
 		}
 		return usuarioLogado;
-	}
-	
-	public int getQtdItensCarrinho() {
-		qtdItensCarrinho = 0;
-		List<ItemVenda> itens = (List<ItemVenda>) Session.getInstance().getAttribute("carrinho");
-		if (itens != null)
-			qtdItensCarrinho = itens.size();
-		return qtdItensCarrinho;	
-		
 	}
 
 	public void setUsuarioLogado(Usuario usuarioLogado) {
