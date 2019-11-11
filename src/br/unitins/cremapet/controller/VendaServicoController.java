@@ -19,14 +19,14 @@ public class VendaServicoController implements Serializable {
 
 	private static final long serialVersionUID = 8015884904673395920L;
 	
-	private String nome;
+	private String descricao;
 	
 	private List<Servico> listaServico = null;
 	
 	public List<Servico> getListaServico() {
 		if (listaServico == null) {
 			ServicoDAO dao = new ServicoDAO();
-			listaServico = dao.findByNome(getNome());
+			listaServico = dao.findByNome(getDescricao());
 			if (listaServico == null)
 				listaServico = new ArrayList<Servico>();
 			dao.closeConnection();
@@ -68,15 +68,13 @@ public class VendaServicoController implements Serializable {
 				+ "Quantidade de Itens: " + carrinho.size());
 		
 	}
-	
 
-	
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-
+	
 }

@@ -139,7 +139,7 @@ public class ServicoDAO extends DAO<Servico> {
 					"FROM " +
 					"  public.servico " +
 					"WHERE " +
-					"  nome ilike ? ");
+					"  descricao ilike ? ");
 			
 			stat.setString(1, nome == null ? "%" : "%"+nome+"%");
 			ResultSet rs = stat.executeQuery();
