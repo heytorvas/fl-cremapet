@@ -70,6 +70,7 @@ public class ClienteController implements Serializable{
 				e.printStackTrace();
 			}
 		}
+		Util.redirect("cliente.xhtml");
 	}
 	
 	public void alterar() {

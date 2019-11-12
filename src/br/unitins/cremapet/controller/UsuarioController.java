@@ -75,6 +75,7 @@ public class UsuarioController implements Serializable {
 				e.printStackTrace();
 			}
 		}
+		Util.redirect("usuario.xhtml");
 	}
 	
 	public void alterar() {

@@ -58,6 +58,7 @@ public class PetController implements Serializable {
 			Util.addMessageInfo("Erro ao incluir o Usu�rio no Banco de Dados.");
 			e.printStackTrace();
 		}
+		Util.redirect("pet.xhtml");
 
 	}
 
