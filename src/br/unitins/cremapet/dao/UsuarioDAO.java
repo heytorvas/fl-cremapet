@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unitins.cremapet.application.Util;
+import br.unitins.cremapet.model.Usuario;
 import br.unitins.cremapet.model.Endereco;
 import br.unitins.cremapet.model.Perfil;
 import br.unitins.cremapet.model.Sexo;
@@ -254,4 +256,45 @@ public class UsuarioDAO extends DAO<Usuario> {
 		return null;
 	}
 
+	public List<Usuario> findByNome(String nome) {
+		// verificando se tem uma conexao valida
+		Connection conn = getConnection();
+		if (conn == null) 
+			return null;
+		
+		List<Usuario> listaUsuario = new ArrayList<Usuario>();
+		
+		PreparedStatement stat = null;
+	
+		try {
+			stat = conn.prepareStatement("SELECT * FROM usuario WHERE nome ILIKE ?");
+			stat.setString(1, (nome == null? "%" : "%"+nome+"%"));
+			ResultSet rs = stat.executeQuery();
+			
+			while(rs.next()) {
+				Usuario usuario = new Usuario();
+				usuario.setId(rs.getInt("id"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setLogin(rs.getString("login"));
+				usuario.setCpf(rs.getString("cpf"));
+				usuario.setSexo(Sexo.valueOf(rs.getInt("sexo")));
+				usuario.setPerfil(Perfil.valueOf(rs.getInt("perfil")));
+				usuario.setSalario(rs.getDouble("salario"));
+
+				listaUsuario.add(usuario);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Util.addMessageError("Falha ao consultar o Banco de Dados.");
+			listaUsuario = null;
+		} finally {
+			try {
+				stat.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return listaUsuario;
+	}
+	
 }

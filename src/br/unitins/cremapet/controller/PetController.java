@@ -12,7 +12,9 @@ import br.unitins.cremapet.application.Util;
 import br.unitins.cremapet.dao.ClienteDAO;
 import br.unitins.cremapet.dao.DAO;
 import br.unitins.cremapet.dao.PetDAO;
+import br.unitins.cremapet.dao.PetDAO;
 import br.unitins.cremapet.model.Sexo;
+import br.unitins.cremapet.model.Pet;
 import br.unitins.cremapet.model.Cliente;
 import br.unitins.cremapet.model.Pet;
 
@@ -23,6 +25,8 @@ public class PetController implements Serializable {
 	private static final long serialVersionUID = -1856585121449134148L;
 
 	private Pet pet;
+	
+	private String nome;
 
 	private List<Pet> listaPet;
 
@@ -115,6 +119,18 @@ public class PetController implements Serializable {
 		setPet(p);
 //		setUsuario(dao.findId(usuario.getId()));
 	}
+	
+	public List<Pet> listaPetPesquisa() {
+		if (listaPet == null) {
+			PetDAO dao = new PetDAO();
+			listaPet = dao.findByNome(getNome());
+			if (listaPet == null) {
+				listaPet = new ArrayList<Pet>();
+			}
+			dao.closeConnection();
+		}
+		return listaPet;
+	}
 
 	public Pet getPet() {
 		if (pet == null) {
@@ -131,9 +147,21 @@ public class PetController implements Serializable {
 	public void limpar() {
 		pet = null;
 	}
+	
+	public void pesquisar() {
+		listaPet = null;
+	}
 
 	public Sexo[] getListaSexo() {
 		return Sexo.values();
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

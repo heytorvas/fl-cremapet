@@ -17,11 +17,11 @@
 								globalOnly="false" />
 							<h:panelGrid id="panelPrincipal" styleClass="form-row mb-4"
 								columns="1">
-								<h4 class="font-weight-bold">Cadastro de Servico</h4>
+								<h4 class="font-weight-bold">Cadastro de Serviço</h4>
 								<h:panelGrid columns="2">
 
 									<h:panelGrid columns="1" class="mr-2 ">
-										<h:outputLabel value="Descricao: " />
+										<h:outputLabel value="Descrição: " />
 										<h:inputText id="inputDescricao"
 											value="#{servicoController.servico.descricao}"
 											styleClass="form-control form-control-lg pr-5 mr-5" />
@@ -73,9 +73,35 @@
 					<div class="datatable-row">
 						<h:form>
 							<h4 class="font-weight-bold">Infos</h4>
+							
+							<br />
+
+
+							<h:panelGrid id="panelForm" columns="1">
+
+
+								<h:panelGrid columns="2" class="mr-2 ">
+									<h:outputLabel value="Serviço: " />
+									<h:inputText value="#{servicoController.descricao}"
+										styleClass="form-control form-control-lg pr-5 mr-5" />
+								</h:panelGrid>
+
+								<br />
+
+								<h:panelGrid columns="1" class="mr-2 ">
+									<h:commandButton value="Pesquisar"
+										actionListener="#{servicoController.pesquisar}">
+										<f:ajax execute="panelForm" render="@all" />
+									</h:commandButton>
+								</h:panelGrid>
+
+							</h:panelGrid>
+
+							<br />
+							
 							<h:panelGrid id="panelDataTable">
 								<h:dataTable id="dataTable"
-									value="#{servicoController.listaServico}" var="obj"
+									value="#{servicoController.listaServicoPesquisa()}" var="obj"
 									styleClass="table" headerClass="table-header"
 									rowClasses="table-odd-row, table-even-row">
 									<h:column>
@@ -83,7 +109,7 @@
 										<h:outputLabel value="#{obj.id}" />
 									</h:column>
 									<h:column>
-										<f:facet name="header">Descricao</f:facet>
+										<f:facet name="header">Descrição</f:facet>
 										<h:commandLink value="#{obj.descricao}" style="color: black;"
 											actionListener="#{servicoController.editar(obj)}">
 											<f:ajax

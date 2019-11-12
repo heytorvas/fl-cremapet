@@ -228,7 +228,4 @@ public class ClienteDAO extends DAO<Cliente>{
 		}
 		return listaUsuario;
 	}
-	
-	
-	
 }

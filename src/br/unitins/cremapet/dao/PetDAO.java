@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unitins.cremapet.model.Cliente;
+import br.unitins.cremapet.application.Util;
+import br.unitins.cremapet.model.Pet;
 import br.unitins.cremapet.model.Pet;
 import br.unitins.cremapet.model.Sexo;
 import br.unitins.cremapet.model.Pet;
@@ -156,5 +157,44 @@ public class PetDAO extends DAO<Pet>{
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public List<Pet> findByNome(String nome) {
+		// verificando se tem uma conexao valida
+		Connection conn = getConnection();
+		if (conn == null) 
+			return null;
+		
+		List<Pet> listaPet = new ArrayList<Pet>();
+		
+		PreparedStatement stat = null;
+	
+		try {
+			stat = conn.prepareStatement("SELECT * FROM pet WHERE nome ILIKE ?");
+			stat.setString(1, (nome == null? "%" : "%"+nome+"%"));
+			ResultSet rs = stat.executeQuery();
+			
+			while(rs.next()) {
+				Pet pet = new Pet();
+				pet.setId(rs.getInt("id"));
+				pet.setNome(rs.getString("nome"));
+				pet.setRaca(rs.getString("raca"));
+				pet.setAnimal(rs.getString("animal"));
+				pet.setSexo(Sexo.valueOf(rs.getInt("sexo")));
+
+				listaPet.add(pet);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Util.addMessageError("Falha ao consultar o Banco de Dados.");
+			listaPet = null;
+		} finally {
+			try {
+				stat.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return listaPet;
 	}
 }

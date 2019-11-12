@@ -68,7 +68,7 @@
 								</h:panelGrid>
 								<br />
 
-								<h4 class="font-weight-bold">Endereco</h4>
+								<h4 class="font-weight-bold">Endereço</h4>
 
 								<h:panelGrid columns="2">
 									<h:panelGrid columns="1" class="mr-2 ">
@@ -151,9 +151,34 @@
 					<div class="datatable-row">
 						<h:form>
 							<h4 class="font-weight-bold">Infos</h4>
+							<br />
+
+
+							<h:panelGrid id="panelForm" columns="1">
+
+
+								<h:panelGrid columns="2" class="mr-2 ">
+									<h:outputLabel value="Cliente: " />
+									<h:inputText value="#{clienteController.nome}"
+										styleClass="form-control form-control-lg pr-5 mr-5" />
+								</h:panelGrid>
+
+								<br />
+
+								<h:panelGrid columns="1" class="mr-2 ">
+									<h:commandButton value="Pesquisar"
+										actionListener="#{clienteController.pesquisar}">
+										<f:ajax execute="panelForm" render="@all" />
+									</h:commandButton>
+								</h:panelGrid>
+
+							</h:panelGrid>
+							
+							<br />
+
 							<h:panelGrid id="panelDataTable">
 								<h:dataTable id="dataTable"
-									value="#{clienteController.listaCliente}" var="obj"
+									value="#{clienteController.listaClientePesquisa()}" var="obj"
 									styleClass="table" headerClass="table-header"
 									rowClasses="table-odd-row, table-even-row">
 									<h:column>

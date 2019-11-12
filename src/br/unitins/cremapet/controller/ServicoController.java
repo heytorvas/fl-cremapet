@@ -13,6 +13,8 @@ import javax.inject.Named;
 import br.unitins.cremapet.application.Util;
 import br.unitins.cremapet.dao.DAO;
 import br.unitins.cremapet.dao.ServicoDAO;
+import br.unitins.cremapet.dao.ServicoDAO;
+import br.unitins.cremapet.model.Servico;
 import br.unitins.cremapet.model.Servico;
 
 @Named
@@ -22,9 +24,27 @@ public class ServicoController implements Serializable {
 	private static final long serialVersionUID = 1304356328800728020L;
 
 	private Servico servico;
+	
+	private String descricao;
 
 	private List<Servico> listaServico;
 
+	public List<Servico> listaServicoPesquisa() {
+		if (listaServico == null) {
+			ServicoDAO dao = new ServicoDAO();
+			listaServico = dao.findByNome(getDescricao());
+			if (listaServico == null) {
+				listaServico = new ArrayList<Servico>();
+			}
+			dao.closeConnection();
+		}
+		return listaServico;
+	}
+	
+	public void pesquisar() {
+		listaServico = null;
+	}
+	
 	public List<Servico> getListaServico() {
 		if (listaServico == null) {
 			DAO<Servico> dao = new ServicoDAO();
@@ -114,6 +134,14 @@ public class ServicoController implements Serializable {
 
 	public void limpar() {
 		servico = null;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 }

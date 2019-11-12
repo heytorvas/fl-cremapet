@@ -132,14 +132,7 @@ public class ServicoDAO extends DAO<Servico> {
 		
 		try {
 			PreparedStatement stat = conn.prepareStatement(
-					"SELECT " +
-					"  id, " +
-					"  descricao, " +
-					"  valor " +
-					"FROM " +
-					"  public.servico " +
-					"WHERE " +
-					"  descricao ilike ? ");
+					"SELECT * FROM servico WHERE descricao ILIKE ?");
 			
 			stat.setString(1, nome == null ? "%" : "%"+nome+"%");
 			ResultSet rs = stat.executeQuery();

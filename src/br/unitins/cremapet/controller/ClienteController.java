@@ -24,6 +24,8 @@ public class ClienteController implements Serializable{
 	
 	private Cliente cliente;
 	
+	private String nome;
+	
 	private List<Cliente> listaCliente;
 	
 	public List<Cliente> getListaCliente() {
@@ -33,6 +35,18 @@ public class ClienteController implements Serializable{
 			if (listaCliente == null)
 				listaCliente = new ArrayList<Cliente>();
 		} 
+		return listaCliente;
+	}
+	
+	public List<Cliente> listaClientePesquisa() {
+		if (listaCliente == null) {
+			ClienteDAO dao = new ClienteDAO();
+			listaCliente = dao.findByNome(getNome());
+			if (listaCliente == null) {
+				listaCliente = new ArrayList<Cliente>();
+			}
+			dao.closeConnection();
+		}
 		return listaCliente;
 	}
 
@@ -134,6 +148,10 @@ public class ClienteController implements Serializable{
 		setCliente(cli);
 //		setUsuario(dao.findId(usuario.getId()));
 	}
+	
+	public void pesquisar() {
+		listaCliente = null;
+	}
 
 	public Cliente getCliente() {
 		if (cliente == null) {
@@ -158,6 +176,14 @@ public class ClienteController implements Serializable{
 	
 	public Estado[] getListaEstado() {
 		return Estado.values();
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

@@ -9,8 +9,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.cremapet.application.Util;
+import br.unitins.cremapet.dao.ClienteDAO;
 import br.unitins.cremapet.dao.DAO;
 import br.unitins.cremapet.dao.UsuarioDAO;
+import br.unitins.cremapet.model.Cliente;
 import br.unitins.cremapet.model.Endereco;
 import br.unitins.cremapet.model.Estado;
 import br.unitins.cremapet.model.Perfil;
@@ -25,6 +27,8 @@ public class UsuarioController implements Serializable {
 
 	private Usuario usuario;
 	
+	private String nome;
+	
 	private List<Usuario> listaUsuario;
 	
 	public List<Usuario> getListaUsuario() {
@@ -34,6 +38,18 @@ public class UsuarioController implements Serializable {
 			if (listaUsuario == null)
 				listaUsuario = new ArrayList<Usuario>();
 		} 
+		return listaUsuario;
+	}
+	
+	public List<Usuario> listaUsuarioPesquisa() {
+		if (listaUsuario == null) {
+			UsuarioDAO dao = new UsuarioDAO();
+			listaUsuario = dao.findByNome(getNome());
+			if (listaUsuario == null) {
+				listaUsuario = new ArrayList<Usuario>();
+			}
+			dao.closeConnection();
+		}
 		return listaUsuario;
 	}
 
@@ -155,6 +171,10 @@ public class UsuarioController implements Serializable {
 		usuario = null;
 	}
 	
+	public void pesquisar() {
+		listaUsuario = null;
+	}
+	
 	public Perfil[] getListaPerfil() {
 		return Perfil.values();
 	}
@@ -165,6 +185,14 @@ public class UsuarioController implements Serializable {
 	
 	public Estado[] getListaEstado() {
 		return Estado.values();
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
 	
