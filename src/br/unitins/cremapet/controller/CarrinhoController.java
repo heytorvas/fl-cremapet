@@ -116,6 +116,10 @@ public class CarrinhoController implements Serializable {
 	public void finalizar() {
 		// Definindo o usuario que está logado com o cliente
 		Usuario user = (Usuario) Session.getInstance().getAttribute("usuarioLogado");
+		if (user == null) {
+			Util.addMessageWarn("Eh preciso estar logado para finalizar a venda!");
+			return;
+		}
 		getVenda().setUsuario(user);
 
 		getVenda().setCliente(getVenda().getCliente());
